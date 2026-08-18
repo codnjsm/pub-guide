@@ -2,68 +2,105 @@
 import { ref } from 'vue'
 import CodePreview from '../components/guide/CodePreview.vue'
 
-const query = ref('아이오닉')
-const suggestions = ['아이오닉 6', '아이오닉 5', '아이오닉 9', '아이오닉 브랜드 스토리']
+const searchOpen = ref(true)
+const query = ref('')
+const popularSearches = [
+  '사양조회',
+  '아반떼',
+  '제네시스',
+  '캐스퍼',
+  '네비게이션 업데이트',
+  '네비게이션',
+  '코나',
+  '소나타',
+  '그랜저',
+  '팰리세이드',
+]
 
-const code = `<v-menu :model-value="suggestions.length > 0" :close-on-content-click="false">
-  <template #activator="{ props }">
+const code = `<v-btn
+  :icon="searchOpen ? 'mdi-close' : 'mdi-magnify'"
+  variant="text"
+  @click="searchOpen = !searchOpen"
+/>
+
+<v-expand-transition>
+  <v-sheet v-if="searchOpen" class="pa-6">
     <v-text-field
-      v-bind="props"
       v-model="query"
-      density="compact"
       variant="solo"
       flat
-      hide-details
-      placeholder="검색어를 입력하세요"
-      prepend-inner-icon="mdi-magnify"
+      clearable
+      density="comfortable"
+      placeholder="검색어를 입력해주세요"
+      append-inner-icon="mdi-magnify"
     />
-  </template>
 
-  <v-list density="compact">
-    <v-list-item
-      v-for="item in suggestions"
-      :key="item"
-      :title="item"
-      prepend-icon="mdi-magnify"
-    />
-  </v-list>
-</v-menu>`
+    <v-row class="mt-2">
+      <v-col cols="12" sm="6">
+        <div class="d-flex justify-space-between align-center mb-2">
+          <span class="font-weight-bold">최근 검색어</span>
+          <v-btn variant="text" size="small">검색기록 삭제</v-btn>
+        </div>
+        <p class="text-caption text-medium-emphasis">최근 검색어가 없습니다.</p>
+      </v-col>
+
+      <v-col cols="12" sm="6">
+        <p class="font-weight-bold mb-2">인기 검색어 Top10</p>
+        <v-list density="compact">
+          <v-list-item v-for="(term, i) in popularSearches" :key="term" :title="\`\${i + 1}위. \${term}\`" />
+        </v-list>
+      </v-col>
+    </v-row>
+  </v-sheet>
+</v-expand-transition>`
 </script>
 
 <template>
-  <v-container class="py-10" style="max-width: 1080px">
-    <h1 class="text-h5 font-weight-bold mb-2">검색 자동완성 드롭다운</h1>
+  <v-container class="guide-container">
+    <h1 class="text-h5 font-weight-bold mb-2">검색 패널</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
-      검색바에 입력하는 동안 하단에 추천 검색어를 드롭다운으로 보여주는
-      패턴입니다. <code>v-menu</code>로 텍스트필드 아래 <code>v-list</code>를
-      띄웠습니다.
+      헤더의 검색 아이콘을 <strong>클릭</strong>하면 열리는 전체 폭 패널입니다.
+      검색창 아래 최근 검색어와 인기 검색어 Top10을 나란히 보여줍니다.
+      <code>v-expand-transition</code>으로 열고 닫히는 애니메이션을 넣었습니다.
     </p>
 
     <CodePreview :code="code">
-      <v-menu :model-value="true" :close-on-content-click="false">
-        <template #activator="{ props }">
+      <v-btn
+        :icon="searchOpen ? 'mdi-close' : 'mdi-magnify'"
+        variant="text"
+        @click="searchOpen = !searchOpen"
+      />
+
+      <v-expand-transition>
+        <v-sheet v-if="searchOpen" class="pa-6" rounded="lg">
           <v-text-field
-            v-bind="props"
             v-model="query"
-            density="compact"
             variant="solo"
             flat
-            hide-details
-            placeholder="검색어를 입력하세요"
-            prepend-inner-icon="mdi-magnify"
-            style="max-width: 360px"
+            clearable
+            density="comfortable"
+            placeholder="검색어를 입력해주세요"
+            append-inner-icon="mdi-magnify"
           />
-        </template>
 
-        <v-list density="compact">
-          <v-list-item
-            v-for="item in suggestions"
-            :key="item"
-            :title="item"
-            prepend-icon="mdi-magnify"
-          />
-        </v-list>
-      </v-menu>
+          <v-row class="mt-2">
+            <v-col cols="12" sm="6">
+              <div class="d-flex justify-space-between align-center mb-2">
+                <span class="font-weight-bold">최근 검색어</span>
+                <v-btn variant="text" size="small">검색기록 삭제</v-btn>
+              </div>
+              <p class="text-caption text-medium-emphasis">최근 검색어가 없습니다.</p>
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <p class="font-weight-bold mb-2">인기 검색어 Top10</p>
+              <v-list density="compact">
+                <v-list-item v-for="(term, i) in popularSearches" :key="term" :title="`${i + 1}위. ${term}`" />
+              </v-list>
+            </v-col>
+          </v-row>
+        </v-sheet>
+      </v-expand-transition>
     </CodePreview>
   </v-container>
 </template>

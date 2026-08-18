@@ -27,7 +27,7 @@ const code = `<div class="d-flex align-center">
 </script>
 
 <template>
-  <v-container class="py-10" style="max-width: 1080px">
+  <v-container class="guide-container">
     <h1 class="text-h5 font-weight-bold mb-2">슬라이드 네비게이션</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       주요 카테고리를 가로 스크롤 칩으로 배치하고, 좌우 화살표 버튼으로 이동할 수

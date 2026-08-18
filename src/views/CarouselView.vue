@@ -25,7 +25,7 @@ const code = `<div>
 </script>
 
 <template>
-  <v-container class="py-10" style="max-width: 1080px">
+  <v-container class="guide-container">
     <h1 class="text-h5 font-weight-bold mb-2">캐러셀 / 슬라이더</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       제목 옆 좌우 화살표로 넘기는 브랜드/이벤트 슬라이더 패턴입니다.

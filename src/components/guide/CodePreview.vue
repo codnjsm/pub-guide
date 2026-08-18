@@ -9,7 +9,9 @@ const tab = ref('preview')
 const copied = ref(false)
 const viewport = ref('desktop')
 
-const viewportWidth = computed(() => ({ desktop: '100%', tablet: '768px', mobile: '375px' }[viewport.value]))
+const viewportWidth = computed(
+  () => ({ desktop: '100%', tablet: '768px', mobile: '375px' })[viewport.value],
+)
 
 async function copyCode(code) {
   await navigator.clipboard.writeText(code)
@@ -30,7 +32,7 @@ async function copyCode(code) {
         mandatory
         density="compact"
         variant="outlined"
-        class="align-self-center mr-2"
+        class="align-self-center mr-2 viewport-toggle"
       >
         <v-btn value="desktop" icon="mdi-monitor" size="small" />
         <v-btn value="tablet" icon="mdi-tablet" size="small" />
@@ -63,17 +65,30 @@ async function copyCode(code) {
   </v-card>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .preview-area {
   padding: 24px;
-  background: #fafafa;
+  background: #f6f3f2;
   overflow: auto;
 }
-.preview-frame {
+
+.preview-area .preview-frame {
   margin: 0 auto;
   max-width: 100%;
   transition: width 0.2s ease;
 }
+
+.viewport-toggle {
+  gap: 4px;
+}
+
+.viewport-toggle .v-btn {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+}
+
 .code-area {
   margin: 0;
   padding: 20px 24px;

@@ -10,7 +10,7 @@ const columns = [
 const socials = ['mdi-youtube', 'mdi-instagram', 'mdi-facebook', 'mdi-twitter', 'mdi-post-outline']
 
 const code = `<v-footer color="surface-variant" class="d-flex flex-column pt-10">
-  <v-container style="max-width: 1080px">
+  <v-container class="footer-inner">
     <v-row>
       <v-col v-for="col in columns" :key="col.title" cols="12" sm="4">
         <p class="font-weight-bold mb-3">{{ col.title }}</p>
@@ -36,7 +36,7 @@ const code = `<v-footer color="surface-variant" class="d-flex flex-column pt-10"
 </script>
 
 <template>
-  <v-container class="py-10" style="max-width: 1080px">
+  <v-container class="guide-container">
     <h1 class="text-h5 font-weight-bold mb-2">푸터</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       기업정보 / IR정보 / 지속가능경영 3단 그리드와 로고·고객센터·SNS 아이콘으로
@@ -45,7 +45,7 @@ const code = `<v-footer color="surface-variant" class="d-flex flex-column pt-10"
 
     <CodePreview :code="code">
       <v-footer color="surface-variant" class="d-flex flex-column pt-10" rounded="lg">
-        <v-container style="max-width: 1080px">
+        <v-container class="footer-inner">
           <v-row>
             <v-col v-for="col in columns" :key="col.title" cols="12" sm="4">
               <p class="font-weight-bold mb-3">{{ col.title }}</p>
@@ -71,3 +71,9 @@ const code = `<v-footer color="surface-variant" class="d-flex flex-column pt-10"
     </CodePreview>
   </v-container>
 </template>
+
+<style lang="scss" scoped>
+.footer-inner {
+  max-width: 1080px;
+}
+</style>

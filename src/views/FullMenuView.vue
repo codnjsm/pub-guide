@@ -30,7 +30,7 @@ const code = `<v-overlay v-model="menuOpen" scrim="white" opacity="1" location-s
 </script>
 
 <template>
-  <v-container class="py-10" style="max-width: 1080px">
+  <v-container class="guide-container">
     <h1 class="text-h5 font-weight-bold mb-2">전체메뉴 풀스크린 오버레이</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       헤더의 메뉴 버튼을 누르면 전체 화면을 덮는 형태로 모든 카테고리를 한눈에
@@ -39,7 +39,7 @@ const code = `<v-overlay v-model="menuOpen" scrim="white" opacity="1" location-s
     </p>
 
     <CodePreview :code="code">
-      <v-sheet class="d-flex flex-column pa-8" rounded="lg" style="min-height: 420px">
+      <v-sheet class="d-flex flex-column pa-8 fullmenu-preview" rounded="lg">
         <div class="d-flex justify-space-between align-center mb-10">
           <span class="text-h6 font-weight-bold">HYUNDAI</span>
           <v-btn icon="mdi-close" variant="text" />
@@ -59,3 +59,9 @@ const code = `<v-overlay v-model="menuOpen" scrim="white" opacity="1" location-s
     </CodePreview>
   </v-container>
 </template>
+
+<style lang="scss" scoped>
+.fullmenu-preview {
+  min-height: 420px;
+}
+</style>

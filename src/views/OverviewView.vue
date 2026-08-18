@@ -1,73 +1,89 @@
-<script setup>
-const colors = [
-  { name: 'Primary', hex: '#002C5F', desc: '헤더 GNB 언어선택 액티브, 브랜드 강조 (hyundai.com 실측)' },
-  { name: 'Accent', hex: '#007FA8', desc: 'GNB 호버/액티브, 링크 (자세히 보기) (hyundai.com 실측)' },
-  { name: 'Secondary', hex: '#767676', desc: '보조 텍스트, 검색 placeholder (hyundai.com 실측)' },
-  { name: 'Surface Variant', hex: '#F6F3F2', desc: '공식 theme-color 메타값, 섹션 구분 배경' },
-  { name: 'Surface', hex: '#FFFFFF', desc: '기본 배경(흰색)' },
-]
-
-const typeScale = [
-  { tag: 'H1', size: '32px / 40px', weight: '700', usage: '히어로 배너 타이틀' },
-  { tag: 'H2', size: '24px / 32px', weight: '700', usage: '섹션 제목' },
-  { tag: 'H3', size: '18px / 26px', weight: '600', usage: '카드 제목' },
-  { tag: 'Body', size: '15px / 24px', weight: '400', usage: '본문/설명' },
-  { tag: 'Caption', size: '13px / 20px', weight: '400', usage: '보조 설명, 링크' },
-]
-</script>
-
 <template>
-  <v-container class="py-10" style="max-width: 1080px">
+  <v-container class="guide-container">
     <div class="mb-10">
-      <h1 class="text-h4 font-weight-bold mb-2">퍼블리싱 가이드</h1>
+      <h1 class="text-h4 font-weight-bold mb-2">개요</h1>
       <p class="text-body-1 text-medium-emphasis">
-        현대자동차 홈페이지(hyundai.com/kr/ko/e)의 레이아웃 패턴을 참고하여 정리한
-        Vue 3 + Vuetify 컴포넌트 스타일가이드입니다. 왼쪽 메뉴에서 섹션별 마크업과
-        코드를 확인할 수 있습니다.
+        현대자동차 홈페이지(hyundai.com/kr/ko/e)의 레이아웃 패턴을 참고하여 정리한 컴포넌트 퍼블리싱
+        가이드입니다.<br />왼쪽 메뉴에서 섹션별 마크업과 코드를 확인할 수 있습니다.
       </p>
     </div>
 
-    <h2 class="text-h6 font-weight-bold mb-4">컬러 팔레트</h2>
-    <v-row class="mb-10">
-      <v-col v-for="c in colors" :key="c.name" cols="12" sm="6" md="4">
-        <v-card variant="outlined" rounded="lg">
-          <div :style="{ background: c.hex, height: '64px' }" />
-          <v-card-text>
-            <div class="d-flex justify-space-between align-center mb-1">
-              <span class="font-weight-bold">{{ c.name }}</span>
-              <span class="text-caption text-medium-emphasis">{{ c.hex }}</span>
-            </div>
-            <span class="text-caption text-medium-emphasis">{{ c.desc }}</span>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <h2 class="text-h6 font-weight-bold mb-4">사용 기술</h2>
+    <v-sheet border rounded="lg" class="mb-10 pa-2">
+      <v-list density="comfortable">
+        <v-list-item prepend-icon="mdi-vuejs" title="Vue 3" subtitle="UI 프레임워크" />
+        <v-list-item prepend-icon="mdi-vuetify" title="Vuetify" subtitle="컴포넌트 라이브러리" />
+        <v-list-item prepend-icon="mdi-router" title="Vue Router" subtitle="라우팅" />
+        <v-list-item prepend-icon="mdi-lightning-bolt" title="Vite" subtitle="빌드 도구" />
+        <v-list-item prepend-icon="mdi-sass" title="Sass (SCSS)" subtitle="스타일" />
+        <v-list-item
+          prepend-icon="mdi-shape"
+          title="Material Design Icons (@mdi/font)"
+          subtitle="아이콘"
+        />
+      </v-list>
+    </v-sheet>
 
-    <h2 class="text-h6 font-weight-bold mb-4">타이포그래피</h2>
-    <v-table class="mb-10">
-      <thead>
-        <tr>
-          <th>구분</th>
-          <th>크기 / 행간</th>
-          <th>굵기</th>
-          <th>용도</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="t in typeScale" :key="t.tag">
-          <td class="font-weight-bold">{{ t.tag }}</td>
-          <td>{{ t.size }}</td>
-          <td>{{ t.weight }}</td>
-          <td>{{ t.usage }}</td>
-        </tr>
-      </tbody>
-    </v-table>
-
-    <h2 class="text-h6 font-weight-bold mb-4">참고 페이지 구조</h2>
-    <v-alert type="info" variant="tonal" density="comfortable">
-      상단 GNB → 슬라이드 카테고리 네비게이션 → 히어로 배너(Hi, EV) → 카드/이미지
-      섹션(Trendy Hyundai, HyundaiShop) → 캐러셀 섹션(Brand, Events) → 3단 그리드 푸터
-      순서로 구성되어 있으며, 각 패턴을 왼쪽 메뉴의 개별 페이지에서 재현했습니다.
-    </v-alert>
+    <h2 class="text-h6 font-weight-bold mb-4">폴더 구조</h2>
+    <pre class="folder-tree mb-10">
+      <code>
+pub-guide/
+  ├── public/
+  │   ├── favicon.svg
+  │   └── icons.svg
+  ├── src/
+  │   ├── App.vue                       # 최상위 레이아웃 (앱바 + 좌측 네비게이션 드로어)
+  │   ├── main.js                       # 앱 진입점 (router, vuetify 플러그인 등록)
+  │   ├── assets/
+  │   │   └── hero.png                  # 히어로/카드/캐러셀 섹션 예시 이미지
+  │   ├── plugins/
+  │   │   └── vuetify.js                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
+  │   ├── router/
+  │   │   └── index.js                  # 섹션별 라우트 정의
+  │   ├── data/
+  │   │   └── navItems.js               # 좌측 네비게이션 메뉴 목록
+  │   ├── components/
+  │   │   └── guide/
+  │   │       ├── CodePreview.vue       # 미리보기/코드 탭 전환 + 반응형 뷰포트 토글 (공용 컴포넌트)
+  │   │       └── HyundaiLogo.vue       # 실제 헤더 로고 SVG (공용 컴포넌트)
+  │   └── views/                        # 섹션 페이지 (현대차 UI 패턴 1개당 1개 파일)
+  │       ├── OverviewView.vue          # 개요
+  │       ├── ColorsTypographyView.vue  # 컬러/타이포그래피
+  │       ├── HeaderView.vue            # 헤더 / GNB
+  │       ├── NavigationView.vue        # 슬라이드 네비게이션
+  │       ├── HeroView.vue              # 히어로 배너
+  │       ├── CardsView.vue             # 카드 섹션
+  │       ├── CarouselView.vue          # 캐러셀 / 슬라이더
+  │       ├── FooterView.vue            # 푸터
+  │       ├── FullMenuView.vue          # 전체메뉴 풀스크린 오버레이
+  │       └── SearchSuggestView.vue     # 검색 패널
+  ├── eslint.config.js
+  ├── .prettierrc
+  └── vite.config.js
+      </code>
+    </pre>
   </v-container>
 </template>
+
+<style lang="scss" scoped>
+:deep(.v-list-item-title) {
+  font-weight: 700;
+}
+
+:deep(.v-list-item__content) {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.folder-tree {
+  margin: 0;
+  padding: 20px 24px;
+  background: #f6f3f2;
+  border-radius: 8px;
+  font-family: 'Menlo', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow: auto;
+}
+</style>
