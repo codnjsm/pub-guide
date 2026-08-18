@@ -1,0 +1,27 @@
+{
+  "name": "pub-guide",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0",
+    "vuetify": "^4.1.10"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.8",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.10.0",
+    "prettier": "^3.9.6",
+    "vite": "^8.2.0"
+  }
+}
