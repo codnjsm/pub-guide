@@ -3,6 +3,7 @@
 hyundai.com(kr/ko/e) 페이지의 UI 패턴을 참고해 Vue 3 + Vuetify로 재현한 컴포넌트 스타일가이드입니다. 컬러/폰트/로고는 실제 hyundai.com에서 추출한 값을 반영했습니다.
 
 - 저장소: https://github.com/codnjsm/pub-guide
+- 화면 링크 (GitHub Pages): https://codnjsm.github.io/pub-guide/
 
 ## 실행
 
