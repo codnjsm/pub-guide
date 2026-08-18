@@ -21,7 +21,7 @@ async function copyCode(code) {
 </script>
 
 <template>
-  <v-card variant="outlined" rounded="lg" class="mb-8">
+  <v-card variant="outlined" rounded="lg" class="mb-8 preview-card">
     <v-tabs v-model="tab" color="primary" density="comfortable">
       <v-tab value="preview">미리보기</v-tab>
       <v-tab value="code">코드</v-tab>
@@ -66,6 +66,10 @@ async function copyCode(code) {
 </template>
 
 <style lang="scss" scoped>
+.preview-card {
+  border-color: #e5e5e5;
+}
+
 .preview-area {
   padding: 24px;
   background: #f6f3f2;
