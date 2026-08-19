@@ -1,22 +1,37 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useDisplay } from 'vuetify'
 import { useRoute } from 'vue-router'
 import { navItems } from './data/navItems'
 import HyundaiLogo from './components/guide/HyundaiLogo.vue'
 
 const drawer = ref(true)
 const route = useRoute()
+const { mobile, xs } = useDisplay()
+
+watch(
+  () => drawer.value && mobile.value,
+  (locked) => {
+    document.documentElement.classList.toggle('nav-drawer-locked', locked)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
   <v-app>
-    <v-app-bar color="white" elevation="0" height="64" class="app-bar-border">
+    <v-app-bar
+      color="white"
+      elevation="0"
+      height="64"
+      class="app-bar-border"
+      :class="{ 'app-bar--center-title': xs }"
+    >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title class="d-flex align-center">
         <HyundaiLogo />
         <span class="font-weight-bold text-primary ml-2 app-title-text">퍼블리싱 가이드</span>
       </v-toolbar-title>
-      <v-spacer />
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" width="260">
@@ -66,5 +81,47 @@ const route = useRoute()
 
 .app-title-text {
   line-height: 1;
+}
+
+.nav-drawer-locked {
+  overflow: hidden;
+}
+
+.app-bar--center-title .v-toolbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  margin-inline-start: 0;
+}
+
+.text-scale-h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+.text-scale-h2 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.text-scale-h3 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.text-scale-body {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.text-scale-caption {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
 }
 </style>

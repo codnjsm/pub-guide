@@ -3,8 +3,9 @@ import CodePreview from '../components/guide/CodePreview.vue'
 import heroImg from '../assets/hero.png'
 
 const code = `<v-sheet
-  :style="{ backgroundImage: \`url(\${heroImg})\`, backgroundSize: 'cover' }"
+  :style="{ backgroundImage: \`url(\${heroImg})\`, backgroundSize: 'cover', backgroundPosition: 'center' }"
   height="420"
+  rounded="lg"
   class="d-flex flex-column justify-center px-12"
 >
   <p class="text-caption text-white mb-2">Hi, EV</p>

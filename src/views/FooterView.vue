@@ -9,7 +9,7 @@ const columns = [
 
 const socials = ['mdi-youtube', 'mdi-instagram', 'mdi-facebook', 'mdi-twitter', 'mdi-post-outline']
 
-const code = `<v-footer color="surface-variant" class="d-flex flex-column pt-10">
+const code = `<v-footer color="surface-variant" class="d-flex flex-column pt-10" rounded="lg">
   <v-container class="footer-inner">
     <v-row>
       <v-col v-for="col in columns" :key="col.title" cols="12" sm="4">

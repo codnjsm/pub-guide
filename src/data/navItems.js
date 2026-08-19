@@ -1,6 +1,6 @@
 export const navItems = [
   { title: '개요', to: '/', icon: 'mdi-view-dashboard-outline' },
-  { title: '컬러/타이포그래피', to: '/colors-typography', icon: 'mdi-palette-outline' },
+  { title: '컬러 / 타이포그래피', to: '/colors-typography', icon: 'mdi-palette-outline' },
   { title: '헤더 / GNB', to: '/header', icon: 'mdi-dock-top' },
   { title: '슬라이드 네비게이션', to: '/navigation', icon: 'mdi-menu-swap-outline' },
   { title: '히어로 배너', to: '/hero', icon: 'mdi-image-size-select-actual' },

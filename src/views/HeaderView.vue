@@ -4,42 +4,46 @@ import HyundaiLogo from '../components/guide/HyundaiLogo.vue'
 
 const menuItems = ['모델', '구매/이벤트', '서비스/멤버십', '디지털/고객지원', '브랜드', 'Shop사양백과']
 
-const code = `<v-toolbar color="white" elevation="0" height="64">
+const code = `<v-toolbar color="white" elevation="0" height="64" class="header-preview-toolbar">
   <HyundaiLogo class="ml-4" />
 
-  <div class="d-flex ga-6 ml-8">
-    <v-btn v-for="item in menuItems" :key="item" variant="text" size="small">
-      {{ item }}
-    </v-btn>
-  </div>
+  <template v-if="viewport !== 'mobile'">
+    <div class="d-flex ga-6 ml-8">
+      <v-btn v-for="item in menuItems" :key="item" variant="text" size="small">
+        {{ item }}
+      </v-btn>
+    </div>
+  </template>
 
   <v-spacer />
 
-  <v-menu open-on-hover>
-    <template #activator="{ props }">
-      <v-btn v-bind="props" variant="text" size="small" append-icon="mdi-menu-down">
-        KR
-      </v-btn>
-    </template>
-    <v-list density="compact">
-      <v-list-item title="EN" />
-      <v-list-item title="CN" />
-      <v-list-item title="월드와이드" />
-      <v-list-item title="상용글로벌" />
-    </v-list>
-  </v-menu>
+  <template v-if="viewport !== 'mobile'">
+    <v-menu open-on-hover>
+      <template #activator="{ props }">
+        <v-btn v-bind="props" variant="text" size="small" append-icon="mdi-menu-down">
+          KR
+        </v-btn>
+      </template>
+      <v-list density="compact">
+        <v-list-item title="EN" />
+        <v-list-item title="CN" />
+        <v-list-item title="월드와이드" />
+        <v-list-item title="상용글로벌" />
+      </v-list>
+    </v-menu>
 
-  <v-divider vertical class="mx-2" />
+    <v-divider vertical class="mx-2" />
 
-  <v-menu open-on-hover>
-    <template #activator="{ props }">
-      <v-btn v-bind="props" icon="mdi-account-outline" variant="text" size="small" />
-    </template>
-    <v-list density="compact">
-      <v-list-item title="개인 로그인" append-icon="mdi-chevron-right" />
-      <v-list-item title="법인 로그인" append-icon="mdi-chevron-right" />
-    </v-list>
-  </v-menu>
+    <v-menu open-on-hover>
+      <template #activator="{ props }">
+        <v-btn v-bind="props" icon="mdi-account-outline" variant="text" size="small" />
+      </template>
+      <v-list density="compact">
+        <v-list-item title="개인 로그인" append-icon="mdi-chevron-right" />
+        <v-list-item title="법인 로그인" append-icon="mdi-chevron-right" />
+      </v-list>
+    </v-menu>
+  </template>
 
   <v-btn icon="mdi-magnify" variant="text" />
   <v-btn icon="mdi-menu" variant="text" class="ml-2" />

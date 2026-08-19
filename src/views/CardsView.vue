@@ -5,7 +5,7 @@ import heroImg from '../assets/hero.png'
 const code = `<v-row>
   <v-col cols="12" md="6">
     <v-card variant="flat">
-      <v-img :src="imgSrc" height="200" cover rounded="lg" />
+      <v-img :src="heroImg" height="200" cover rounded="lg" />
       <v-card-title class="px-0">Trendy Hyundai</v-card-title>
       <v-card-text class="px-0 text-medium-emphasis">
         지금 가장 주목받는 현대자동차 소식을 만나보세요
@@ -27,7 +27,7 @@ const code = `<v-row>
       </p>
       <v-row dense>
         <v-col v-for="n in 3" :key="n" cols="4">
-          <v-img :src="imgSrc" aspect-ratio="1" cover rounded="lg" />
+          <v-img :src="heroImg" aspect-ratio="1" cover rounded="lg" />
         </v-col>
       </v-row>
     </v-card>

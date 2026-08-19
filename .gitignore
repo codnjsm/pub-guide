@@ -21,6 +21,9 @@ dist-ssr
 !.forge/codebase/
 !.forge/config.json
 
+# Claude Code local session state
+.claude/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

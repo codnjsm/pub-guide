@@ -8,6 +8,7 @@
       </p>
     </div>
 
+    <v-divider class="mb-10" />
     <h2 class="text-h6 font-weight-bold mb-4">사용 기술</h2>
     <v-sheet border rounded="lg" class="mb-10 pa-2">
       <v-list density="comfortable">
@@ -24,8 +25,9 @@
       </v-list>
     </v-sheet>
 
+    <v-divider class="mb-10" />
     <h2 class="text-h6 font-weight-bold mb-4">폴더 구조</h2>
-    <pre class="folder-tree mb-10">
+    <pre class="folder-tree">
       <code>
 pub-guide/
   ├── public/
@@ -62,6 +64,21 @@ pub-guide/
   └── vite.config.js
       </code>
     </pre>
+
+    <v-divider class="mb-10" />
+    <h2 class="text-h6 font-weight-bold mb-4">새 가이드 추가하는 법</h2>
+    <ol class="text-body-2 pl-5">
+      <li>
+        <code>src/views/</code>에 새 <code>XxxView.vue</code> 작성 (다른 섹션 페이지처럼
+        <code>CodePreview</code>로 미리보기/코드 감싸기)
+      </li>
+      <li><code>src/router/index.js</code>에 라우트 등록</li>
+      <li><code>src/data/navItems.js</code>에 메뉴 항목 추가</li>
+      <li>
+        스타일은 <code>&lt;style lang="scss" scoped&gt;</code> + 중첩(<code>&amp;</code>) 금지,
+        평탄한 선택자만 사용
+      </li>
+    </ol>
   </v-container>
 </template>
 
@@ -77,7 +94,7 @@ pub-guide/
 }
 
 .folder-tree {
-  margin: 0;
+  margin: 0 0 40px;
   padding: 20px 24px;
   background: #f6f3f2;
   border-radius: 8px;

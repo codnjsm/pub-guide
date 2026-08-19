@@ -19,6 +19,7 @@ export default createVuetify({
           primary: '#002C5F',
           secondary: '#767676',
           accent: '#007FA8',
+          border: '#E5E5E5',
           'on-surface-variant': '#767676',
         },
       },

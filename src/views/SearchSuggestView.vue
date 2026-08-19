@@ -24,7 +24,7 @@ const code = `<v-btn
 />
 
 <v-expand-transition>
-  <v-sheet v-if="searchOpen" class="pa-6">
+  <v-sheet v-if="searchOpen" class="pa-6" rounded="lg">
     <v-text-field
       v-model="query"
       variant="solo"
