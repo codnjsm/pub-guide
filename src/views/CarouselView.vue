@@ -67,7 +67,7 @@ const code = `<v-carousel v-model="model" :cycle="playing" height="420" hide-del
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">캐러셀 / 슬라이더</h1>
+    <h1 class="text-h5 font-weight-bold mb-2">Carousel / Slider</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       이미지 위에 타이틀/서브타이틀이 겹쳐지고, 좌우 끝에 이전/다음 모델명이 붙은 화살표로
       넘기는 브랜드 슬라이더 패턴입니다. 화살표는 양방향으로 순환하며, 하단 점을 클릭해도

@@ -29,7 +29,7 @@ const colors = [
 ]
 
 const typeScale = [
-  { tag: 'H1', key: 'h1', size: '32px / 40px', weight: '700', usage: '히어로 배너 타이틀' },
+  { tag: 'H1', key: 'h1', size: '32px / 40px', weight: '700', usage: 'Hero Banner 타이틀' },
   { tag: 'H2', key: 'h2', size: '24px / 32px', weight: '700', usage: '섹션 제목' },
   { tag: 'H3', key: 'h3', size: '18px / 26px', weight: '600', usage: '카드 제목' },
   { tag: 'Body', key: 'body', size: '15px / 24px', weight: '400', usage: '본문/설명' },
@@ -39,7 +39,7 @@ const typeScale = [
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">컬러 / 타이포그래피</h1>
+    <h1 class="text-h5 font-weight-bold mb-2">Colors / Typography</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       전체 섹션에서 공통으로 쓰는 컬러 토큰과 타이포그래피 스케일입니다.
     </p>

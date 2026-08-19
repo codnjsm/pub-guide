@@ -66,7 +66,7 @@ const code = `<div class="nav-pagination">
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">슬라이드 네비게이션</h1>
+    <h1 class="text-h5 font-weight-bold mb-2">Slide Navigation</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       주요 카테고리를 아이콘+라벨 그리드로 배치하고, 좌우 화살표 버튼과 하단 점 인디케이터로
       페이지를 넘길 수 있는 패턴입니다. 화살표는 양방향으로 순환하며(마지막 페이지에서 다음 → 첫

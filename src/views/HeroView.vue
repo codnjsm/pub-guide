@@ -29,7 +29,7 @@ const code = `<v-sheet
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">히어로 배너</h1>
+    <h1 class="text-h5 font-weight-bold mb-2">Hero Banner</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       풀 너비 배경 이미지 위에 타이틀·설명·CTA 버튼을 배치하는 패턴입니다.
       <code>v-sheet</code>에 배경 이미지를 지정하고 좌측 정렬 텍스트를 얹었습니다.

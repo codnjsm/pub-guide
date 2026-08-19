@@ -35,7 +35,7 @@ pub-guide/
 │   ├── App.vue                       # 최상위 레이아웃 (앱바 + 좌측 네비게이션 드로어)
 │   ├── main.js                       # 앱 진입점 (router, vuetify 플러그인 등록)
 │   ├── assets/
-│   │   └── hero.png                  # 히어로/카드/캐러셀 섹션 예시 이미지
+│   │   └── hero.png                  # Hero Banner/Cards/Carousel 섹션 예시 이미지
 │   ├── plugins/
 │   │   └── vuetify.js                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
 │   ├── router/
@@ -47,16 +47,16 @@ pub-guide/
 │   │       ├── CodePreview.vue       # 미리보기/코드 탭 전환 + 반응형 뷰포트 토글 (공용 컴포넌트)
 │   │       └── HyundaiLogo.vue       # 실제 헤더 로고 SVG (공용 컴포넌트)
 │   └── views/                        # 섹션 페이지 (현대차 UI 패턴 1개당 1개 파일)
-│       ├── OverviewView.vue          # 개요
-│       ├── ColorsTypographyView.vue  # 컬러/타이포그래피
-│       ├── HeaderView.vue            # 헤더 / GNB
-│       ├── NavigationView.vue        # 슬라이드 네비게이션
-│       ├── HeroView.vue              # 히어로 배너
-│       ├── CardsView.vue             # 카드 섹션
-│       ├── CarouselView.vue          # 캐러셀 / 슬라이더
-│       ├── FooterView.vue            # 푸터
-│       ├── FullMenuView.vue          # 전체메뉴 풀스크린 오버레이
-│       └── SearchSuggestView.vue     # 검색 패널
+│       ├── OverviewView.vue          # Overview
+│       ├── ColorsTypographyView.vue  # Colors / Typography
+│       ├── HeaderView.vue            # Header / GNB
+│       ├── NavigationView.vue        # Slide Navigation
+│       ├── HeroView.vue              # Hero Banner
+│       ├── CardsView.vue             # Cards
+│       ├── CarouselView.vue          # Carousel / Slider
+│       ├── FooterView.vue            # Footer
+│       ├── FullMenuView.vue          # Full Menu Overlay
+│       └── SearchSuggestView.vue     # Search Panel
 ├── eslint.config.js
 ├── .prettierrc
 └── vite.config.js
@@ -69,5 +69,20 @@ pub-guide/
 - 섹션 페이지별로만 쓰이는 스타일(검색창 폭, 프리뷰 컨테이너 높이 등)은 각 파일의 `<style lang="scss" scoped>` 블록에 파일 전용 클래스로 둔다. 인라인 `style="..."` 속성은 쓰지 않는다 — 단, 런타임 값에 따라 바뀌는 경우(배경 이미지, 컬러 스와치, 뷰포트 폭)는 `:style` 바인딩으로 남겨둔다.
 - Vuetify 내부 요소(`.v-list-item-title` 등)를 스타일링할 땐 scoped 블록에서 `:deep()`으로 감싼다.
 - Vuetify의 유틸리티 클래스(`mb-10` 등)는 CSS `@layer` 안에 있다. 컴포넌트 자체 `<style scoped>`에서 같은 엘리먼트의 같은 속성(예: `margin`)을 건드리는 규칙이 있으면, 레이어 밖(unlayered) 스타일이 항상 이겨서 유틸리티 클래스가 조용히 무시된다 — **커스텀 클래스에서 `margin`/`padding` 등을 다루는 엘리먼트에는 Vuetify spacing 유틸리티 클래스(`mb-10` 등)를 같이 쓰지 않는다. 필요한 여백은 커스텀 클래스 안에 직접 명시한다.**
+- 같은 이유로, `App.vue`의 전역 `.v-container { padding: 30px }`이 **모든** `v-container`의 패딩을 고정한다 — 개별 `v-container`에 `py-*`/`px-*` 유틸리티를 줘도 조용히 무시된다. 특정 섹션에서 다른 패딩이 필요하면 그 컨테이너 전용 scoped 클래스로 지정한다(예: `FooterView.vue`의 `.footer-inner`).
 - import한 이미지(특히 작은 SVG)를 배경으로 쓸 때 `:style="{ backgroundImage: \`url(${변수})\` }"`처럼 따옴표 없이 감싸지 않는다 — Vite가 작은 SVG를 data URI로 인라인하면 그 안의 홑따옴표가 `url()`과 충돌해 CSS가 깨진다. 항상 `url("${변수}")`처럼 따옴표로 감싼다(필요하면 헬퍼 함수로 분리).
 - 각 섹션 페이지의 "코드" 탭 예시 문자열(`code` 변수)은 실제 프리뷰 템플릿과 항상 동기화한다 — 프리뷰 템플릿에 `viewport` 조건부 로직이나 클래스/prop을 추가·변경하면 `code` 문자열에도 똑같이 반영한다. 어긋나면 사용자가 그대로 복사했을 때 실제 프리뷰와 다르게 동작한다.
+
+## 인터랙션 패턴
+
+- **열고 닫히는 패널(Search Panel, Full Menu Overlay 등)은 토글 버튼을 패널 바깥에 두고, 아이콘만 바꾼다.** 패널 안에 닫기 버튼을 두면 닫힌 뒤 다시 열 방법이 사라져 별도 "열기" 버튼을 또 만들어야 한다. `SearchSuggestView.vue`/`FullMenuView.vue`가 쓰는 형태를 그대로 따른다:
+
+  ```html
+  <v-btn :icon="open ? 'mdi-close' : 'mdi-menu'" variant="text" @click="open = !open" />
+
+  <v-expand-transition>
+    <div v-if="open" class="...">…</div>
+  </v-expand-transition>
+  ```
+
+  아이콘은 닫힌 상태에서 그 패널을 여는 트리거를 쓴다(Search Panel은 `mdi-magnify`, Full Menu Overlay는 `mdi-menu`), 열린 상태는 `mdi-close`로 통일.

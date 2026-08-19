@@ -37,7 +37,7 @@ const code = `<v-row>
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">카드 섹션</h1>
+    <h1 class="text-h5 font-weight-bold mb-2">Cards</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
       이미지 + 텍스트 + "자세히 보기/더보기" 링크로 구성된 소식/상품 소개 섹션입니다.
       (Trendy Hyundai, HyundaiShop Best 참고)
