@@ -87,6 +87,21 @@ watch(
   overflow: hidden;
 }
 
+/* 좌측 네비 메뉴 글자 — Vuetify 기본값(13px) 대신 PC/태블릿 15px, 모바일(xs) 13px.
+   Vuetify의 규칙은 @layer 안에 있어 레이어 밖인 이 전역 규칙이 !important 없이 이긴다.
+   line-height도 같이 지정한다 — Vuetify가 1rem을 걸어두고 overflow: hidden도 적용한다. */
+.v-list-item--nav .v-list-item-title {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+@media (max-width: 599.98px) {
+  .v-list-item--nav .v-list-item-title {
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+
 .app-bar--center-title .v-toolbar-title {
   position: absolute;
   left: 50%;

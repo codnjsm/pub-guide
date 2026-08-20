@@ -1,69 +1,260 @@
 <script setup>
 import CodePreview from '../components/guide/CodePreview.vue'
-import heroImg from '../assets/hero.png'
 
-const code = `<v-sheet
-  :style="{ backgroundImage: \`url(\${heroImg})\`, backgroundSize: 'cover', backgroundPosition: 'center' }"
-  height="420"
-  rounded="lg"
-  class="d-flex flex-column justify-center px-12"
->
-  <p class="text-caption text-white mb-2">Hi, EV</p>
-  <h2 class="text-h4 font-weight-bold text-white mb-4 hero-title">
-    지구 환경을 품은 현대자동차의
-    미래형 모빌리티를 경험해보세요
-  </h2>
-  <p class="text-body-2 text-white mb-6">
-    현대자동차의 전기차를 처음 만나는 순간
-  </p>
+const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
 
-  <div>
-    <v-btn color="white" variant="flat" rounded="pill" class="text-primary mr-4">
-      자세히 보기
-    </v-btn>
-    <v-btn variant="text" class="text-white mr-4">충전소 찾기</v-btn>
-    <v-btn variant="text" class="text-white">N브랜드 급속 충전소</v-btn>
+const code = `<script setup>
+import { useDisplay } from 'vuetify'
+
+const { xs } = useDisplay()
+
+const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
+<\/script>
+
+<template>
+  <div class="hero" :class="{ 'hero--mobile': xs }">
+    <v-icon icon="mdi-image" size="40" class="hero__icon" />
+
+    <ul v-if="!xs" class="hero__breadcrumb">
+      <li v-for="(crumb, i) in breadcrumb" :key="crumb" class="hero__crumb">
+        <v-icon v-if="i > 0" icon="mdi-chevron-right" size="14" class="hero__crumb-sep" />
+        <a v-if="i < breadcrumb.length - 1" href="#">{{ crumb }}</a>
+        <span v-else class="hero__crumb-current">{{ crumb }}</span>
+      </li>
+    </ul>
+
+    <div class="hero__title-wrap">
+      <p class="hero__sub">2026 3Q Trend Report</p>
+      <h2 class="hero__title">Trendy Hyundai</h2>
+    </div>
   </div>
-</v-sheet>`
+</template>
+
+<style lang="scss" scoped>
+.hero {
+  position: relative;
+  aspect-ratio: 2028 / 984;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #4a4a4a;
+}
+
+.hero__icon {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  opacity: 0.28;
+}
+
+.hero__breadcrumb {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 7%;
+  list-style: none;
+}
+
+.hero__crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.hero__crumb a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+.hero__crumb-current {
+  color: #fff;
+  font-weight: 700;
+}
+
+.hero__crumb-sep {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 세로 위치는 top으로 잡는다 — padding의 %는 높이가 아니라 폭 기준이라 원하는 지점에 안 온다 */
+.hero__title-wrap {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  padding: 0 7%;
+}
+
+.hero__sub {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.3;
+  opacity: 0.92;
+}
+
+.hero__title {
+  margin: 0;
+  color: #fff;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.hero--mobile {
+  aspect-ratio: 535 / 778;
+}
+
+.hero--mobile .hero__title-wrap {
+  padding: 0 5%;
+  text-align: center;
+}
+
+.hero--mobile .hero__sub {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.hero--mobile .hero__title {
+  font-size: 34px;
+}
+</style>`
 </script>
 
 <template>
   <v-container class="guide-container">
     <h1 class="text-h5 font-weight-bold mb-2">Hero Banner</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
-      풀 너비 배경 이미지 위에 타이틀·설명·CTA 버튼을 배치하는 패턴입니다.
-      <code>v-sheet</code>에 배경 이미지를 지정하고 좌측 정렬 텍스트를 얹었습니다.
+      페이지 최상단을 채우는 키 비주얼입니다. 배경 이미지 위에 breadcrumb과 서브타이틀·타이틀을
+      얹는 구성이고, 타이틀은 상단 20% 지점에서 시작합니다. 폭에 따라 배치가 바뀝니다 —
+      데스크톱·태블릿은 가로로 넓은 비율에 <strong>좌측 정렬</strong>이고 breadcrumb이 보이며,
+      모바일은 세로로 긴 비율에 <strong>중앙 정렬</strong>이고 breadcrumb을 감춥니다(뷰포트
+      토글로 확인해 보세요). 배경은 실제 이미지 대신 회색 플레이스홀더로 표시했습니다.
     </p>
 
     <CodePreview :code="code">
-      <v-sheet
-        :style="{ backgroundImage: `url(${heroImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
-        height="420"
-        rounded="lg"
-        class="d-flex flex-column justify-center px-12"
-      >
-        <p class="text-caption text-white mb-2">Hi, EV</p>
-        <h2 class="text-h4 font-weight-bold text-white mb-4 hero-title">
-          지구 환경을 품은 현대자동차의 미래형 모빌리티를 경험해보세요
-        </h2>
-        <p class="text-body-2 text-white mb-6">
-          현대자동차의 전기차를 처음 만나는 순간
-        </p>
+      <template #default="{ viewport }">
+        <div class="hero" :class="{ 'hero--mobile': viewport === 'mobile' }">
+          <v-icon icon="mdi-image" size="40" class="hero__icon" />
 
-        <div>
-          <v-btn color="white" variant="flat" rounded="pill" class="text-primary mr-4">
-            자세히 보기
-          </v-btn>
-          <v-btn variant="text" class="text-white mr-4">충전소 찾기</v-btn>
-          <v-btn variant="text" class="text-white">N브랜드 급속 충전소</v-btn>
+          <ul v-if="viewport !== 'mobile'" class="hero__breadcrumb">
+            <li v-for="(crumb, i) in breadcrumb" :key="crumb" class="hero__crumb">
+              <v-icon v-if="i > 0" icon="mdi-chevron-right" size="14" class="hero__crumb-sep" />
+              <a v-if="i < breadcrumb.length - 1" href="#">{{ crumb }}</a>
+              <span v-else class="hero__crumb-current">{{ crumb }}</span>
+            </li>
+          </ul>
+
+          <div class="hero__title-wrap">
+            <p class="hero__sub">2026 3Q Trend Report</p>
+            <h2 class="hero__title">Trendy Hyundai</h2>
+          </div>
         </div>
-      </v-sheet>
+      </template>
     </CodePreview>
   </v-container>
 </template>
 
 <style lang="scss" scoped>
-.hero-title {
-  max-width: 480px;
+.hero {
+  position: relative;
+  aspect-ratio: 2028 / 984;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #4a4a4a;
+}
+
+.hero__icon {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  opacity: 0.28;
+}
+
+.hero__breadcrumb {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 7%;
+  list-style: none;
+}
+
+.hero__crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.hero__crumb a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+.hero__crumb-current {
+  color: #fff;
+  font-weight: 700;
+}
+
+.hero__crumb-sep {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 세로 위치는 top으로 잡는다 — padding의 %는 높이가 아니라 폭 기준이라 원하는 지점에 안 온다 */
+.hero__title-wrap {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  padding: 0 7%;
+}
+
+.hero__sub {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.3;
+  opacity: 0.92;
+}
+
+.hero__title {
+  margin: 0;
+  color: #fff;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.hero--mobile {
+  aspect-ratio: 535 / 778;
+}
+
+.hero--mobile .hero__title-wrap {
+  padding: 0 5%;
+  text-align: center;
+}
+
+.hero--mobile .hero__sub {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.hero--mobile .hero__title {
+  font-size: 34px;
 }
 </style>

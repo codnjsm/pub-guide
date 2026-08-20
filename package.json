@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint": "eslint . && node scripts/gen-codetab.mjs --check",
+    "format": "prettier --write .",
+    "codetab": "node scripts/gen-codetab.mjs"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",

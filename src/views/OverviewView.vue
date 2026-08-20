@@ -37,7 +37,8 @@ pub-guide/
   │   ├── App.vue                       # 최상위 레이아웃 (앱바 + 좌측 네비게이션 드로어)
   │   ├── main.js                       # 앱 진입점 (router, vuetify 플러그인 등록)
   │   ├── assets/
-  │   │   └── hero.png                  # Hero Banner/Cards/Carousel 섹션 예시 이미지
+  │   │   ├── carousel-car.svg          # Carousel 섹션 차량 실루엣 SVG
+  │   │   └── hero.png                  # Cards 섹션 예시 이미지
   │   ├── plugins/
   │   │   └── vuetify.js                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
   │   ├── router/
@@ -59,6 +60,8 @@ pub-guide/
   │       ├── FooterView.vue            # Footer
   │       ├── FullMenuView.vue          # Full Menu Overlay
   │       └── SearchSuggestView.vue     # Search Panel
+  ├── scripts/
+  │   └── gen-codetab.mjs               # 각 섹션 페이지의 코드 탭을 뷰 내용에서 재생성 (npm run codetab)
   ├── eslint.config.js
   ├── .prettierrc
   └── vite.config.js

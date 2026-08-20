@@ -1,80 +1,353 @@
 <script setup>
 import CodePreview from '../components/guide/CodePreview.vue'
-import heroImg from '../assets/hero.png'
 
-const code = `<v-row>
-  <v-col cols="12" md="6">
-    <v-card variant="flat">
-      <v-img :src="heroImg" height="200" cover rounded="lg" />
-      <v-card-title class="px-0">Trendy Hyundai</v-card-title>
-      <v-card-text class="px-0 text-medium-emphasis">
-        지금 가장 주목받는 현대자동차 소식을 만나보세요
-      </v-card-text>
-      <v-btn variant="text" color="primary" append-icon="mdi-chevron-right">
-        자세히 보기
-      </v-btn>
-    </v-card>
-  </v-col>
+const categories = [
+  {
+    title: 'Category 1',
+    items: [
+      { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
+      { title: 'title2', subtitle: 'subtitle2', badges: { badge: true, description: 'description1' } },
+      { title: 'title3', subtitle: 'subtitle3', badges: { badge: true, link: 'link1' } },
+      { title: 'title4', subtitle: 'subtitle4', badges: {} },
+      { title: 'title5', subtitle: 'subtitle5', badges: {} },
+      { title: 'title6', subtitle: 'subtitle6', badges: {} },
+    ],
+  },
+  {
+    title: 'Category 2',
+    items: [
+      { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
+      { title: 'title2', subtitle: 'subtitle2', badges: { description: 'description2' } },
+      { title: 'title3', subtitle: 'subtitle3', badges: {} },
+      { title: 'title4', subtitle: 'subtitle4', badges: {} },
+      { title: 'title5', subtitle: 'subtitle5', badges: {} },
+    ],
+  },
+  {
+    title: 'Category 3',
+    items: [
+      { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
+      { title: 'title2', subtitle: 'subtitle2', badges: { badge: true, link: 'link2' } },
+      { title: 'title3', subtitle: 'subtitle3', badges: {} },
+      { title: 'title4', subtitle: 'subtitle4', badges: {} },
+      { title: 'title5', subtitle: 'subtitle5', badges: {} },
+      { title: 'title6', subtitle: 'subtitle6', badges: {} },
+      { title: 'title7', subtitle: 'subtitle7', badges: {} },
+    ],
+  },
+]
 
-  <v-col cols="12" md="6">
-    <v-card variant="flat">
-      <div class="d-flex justify-space-between align-center mb-2">
-        <span class="text-h6 font-weight-bold">HyundaiShop Best</span>
-        <v-btn variant="text" size="small">더보기</v-btn>
+const code = `<script setup>
+const categories = [
+  {
+    title: 'Category 1',
+    items: [
+      { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
+      { title: 'title2', subtitle: 'subtitle2', badges: { badge: true, description: 'description1' } },
+      { title: 'title3', subtitle: 'subtitle3', badges: { badge: true, link: 'link1' } },
+      { title: 'title4', subtitle: 'subtitle4', badges: {} },
+      { title: 'title5', subtitle: 'subtitle5', badges: {} },
+      { title: 'title6', subtitle: 'subtitle6', badges: {} },
+    ],
+  },
+  {
+    title: 'Category 2',
+    items: [
+      { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
+      { title: 'title2', subtitle: 'subtitle2', badges: { description: 'description2' } },
+      { title: 'title3', subtitle: 'subtitle3', badges: {} },
+      { title: 'title4', subtitle: 'subtitle4', badges: {} },
+      { title: 'title5', subtitle: 'subtitle5', badges: {} },
+    ],
+  },
+  {
+    title: 'Category 3',
+    items: [
+      { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
+      { title: 'title2', subtitle: 'subtitle2', badges: { badge: true, link: 'link2' } },
+      { title: 'title3', subtitle: 'subtitle3', badges: {} },
+      { title: 'title4', subtitle: 'subtitle4', badges: {} },
+      { title: 'title5', subtitle: 'subtitle5', badges: {} },
+      { title: 'title6', subtitle: 'subtitle6', badges: {} },
+      { title: 'title7', subtitle: 'subtitle7', badges: {} },
+    ],
+  },
+]
+<\/script>
+
+<template>
+  <div class="cards">
+    <div v-for="cat in categories" :key="cat.title" class="cards__category">
+      <div class="cards__head">
+        <span class="cards__head-title">{{ cat.title }}</span>
+        <span class="cards__head-num">({{ cat.items.length }})</span>
       </div>
-      <p class="text-body-2 text-medium-emphasis mb-4">
-        지금 HyundaiShop에서 인기 있는 상품이에요
-      </p>
-      <v-row dense>
-        <v-col v-for="n in 3" :key="n" cols="4">
-          <v-img :src="heroImg" aspect-ratio="1" cover rounded="lg" />
-        </v-col>
-      </v-row>
-    </v-card>
-  </v-col>
-</v-row>`
+
+      <div class="cards__grid">
+        <a
+          v-for="item in cat.items"
+          :key="item.title"
+          href="#"
+          target="_blank"
+          class="cards__item"
+        >
+          <div class="cards__item-img">
+            <span v-if="item.badges.badge" class="cards__badge cards__badge--corner">NEW</span>
+            <v-icon icon="mdi-car" size="40" class="cards__item-icon" />
+          </div>
+          <span class="cards__item-title">{{ item.title }}</span>
+          <span class="cards__item-subtitle">{{ item.subtitle }}</span>
+          <span v-if="item.badges.description" class="cards__badge cards__badge--inline">
+            {{ item.badges.description }}
+          </span>
+          <span v-if="item.badges.link" class="cards__badge cards__badge--inline">
+            <v-icon icon="mdi-open-in-new" size="12" />
+            {{ item.badges.link }}
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.cards {
+  background-color: #fff;
+  padding: 20px;
+}
+.cards__category {
+  margin-bottom: 40px;
+}
+
+.cards__head {
+  margin: 0 0 16px;
+  padding-top: 12px;
+  border-top: 2px solid #000;
+}
+
+.cards__head-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.cards__head-num {
+  margin-left: 4px;
+  color: #999;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.cards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.cards__item {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cards__item:hover {
+  background: #f6f3f2;
+}
+
+.cards__item-img {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  margin-bottom: 12px;
+  background: #e5e5e5;
+}
+
+.cards__item-icon {
+  color: #999;
+}
+
+.cards__item-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.cards__item-subtitle {
+  margin-top: 2px;
+  color: #666;
+  font-size: 0.8125rem;
+}
+
+.cards__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.cards__badge--corner {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  background: #007fa8;
+  color: #fff;
+}
+
+.cards__badge--inline {
+  margin-top: 6px;
+  color: #002c5f;
+}
+</style>`
 </script>
 
 <template>
   <v-container class="guide-container">
     <h1 class="text-h5 font-weight-bold mb-2">Cards</h1>
     <p class="text-body-2 text-medium-emphasis mb-8">
-      이미지 + 텍스트 + "자세히 보기/더보기" 링크로 구성된 소식/상품 소개 섹션입니다.
-      (Trendy Hyundai, HyundaiShop Best 참고)
+      카테고리별로 항목을 나열하는 사각형 카드 그리드입니다. 이미지 · 타이틀 · 서브타이틀 순으로
+      배치하고, <strong>마우스를 올리면</strong> 배경이 옅은 색으로 바뀝니다.
+      <strong>클릭하면 새 탭으로 이동</strong>합니다. 이미지 위 코너 배지 하나와, 아이콘이 있거나
+      없는 인라인 배지 두 종류도 함께 보여줍니다. 실제 이미지 대신 회색 플레이스홀더로 표시했습니다.
     </p>
 
     <CodePreview :code="code">
-      <v-row>
-        <v-col cols="12" md="6">
-          <v-card variant="flat">
-            <v-img :src="heroImg" height="200" cover rounded="lg" />
-            <v-card-title class="px-0">Trendy Hyundai</v-card-title>
-            <v-card-text class="px-0 text-medium-emphasis">
-              지금 가장 주목받는 현대자동차 소식을 만나보세요
-            </v-card-text>
-            <v-btn variant="text" color="primary" append-icon="mdi-chevron-right">
-              자세히 보기
-            </v-btn>
-          </v-card>
-        </v-col>
+      <div class="cards">
+        <div v-for="cat in categories" :key="cat.title" class="cards__category">
+          <div class="cards__head">
+            <span class="cards__head-title">{{ cat.title }}</span>
+            <span class="cards__head-num">({{ cat.items.length }})</span>
+          </div>
 
-        <v-col cols="12" md="6">
-          <v-card variant="flat">
-            <div class="d-flex justify-space-between align-center mb-2">
-              <span class="text-h6 font-weight-bold">HyundaiShop Best</span>
-              <v-btn variant="text" size="small">더보기</v-btn>
-            </div>
-            <p class="text-body-2 text-medium-emphasis mb-4">
-              지금 HyundaiShop에서 인기 있는 상품이에요
-            </p>
-            <v-row dense>
-              <v-col v-for="n in 3" :key="n" cols="4">
-                <v-img :src="heroImg" aspect-ratio="1" cover rounded="lg" />
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
+          <div class="cards__grid">
+            <a
+              v-for="item in cat.items"
+              :key="item.title"
+              href="#"
+              target="_blank"
+              class="cards__item"
+            >
+              <div class="cards__item-img">
+                <span v-if="item.badges.badge" class="cards__badge cards__badge--corner">NEW</span>
+                <v-icon icon="mdi-car" size="40" class="cards__item-icon" />
+              </div>
+              <span class="cards__item-title">{{ item.title }}</span>
+              <span class="cards__item-subtitle">{{ item.subtitle }}</span>
+              <span v-if="item.badges.description" class="cards__badge cards__badge--inline">
+                {{ item.badges.description }}
+              </span>
+              <span v-if="item.badges.link" class="cards__badge cards__badge--inline">
+                <v-icon icon="mdi-open-in-new" size="12" />
+                {{ item.badges.link }}
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
     </CodePreview>
   </v-container>
 </template>
+
+<style lang="scss" scoped>
+.cards {
+  background-color: #fff;
+  padding: 20px;
+}
+.cards__category {
+  margin-bottom: 40px;
+}
+
+.cards__head {
+  margin: 0 0 16px;
+  padding-top: 12px;
+  border-top: 2px solid #000;
+}
+
+.cards__head-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.cards__head-num {
+  margin-left: 4px;
+  color: #999;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.cards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.cards__item {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cards__item:hover {
+  background: #f6f3f2;
+}
+
+.cards__item-img {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  margin-bottom: 12px;
+  background: #e5e5e5;
+}
+
+.cards__item-icon {
+  color: #999;
+}
+
+.cards__item-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.cards__item-subtitle {
+  margin-top: 2px;
+  color: #666;
+  font-size: 0.8125rem;
+}
+
+.cards__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.cards__badge--corner {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  background: #007fa8;
+  color: #fff;
+}
+
+.cards__badge--inline {
+  margin-top: 6px;
+  color: #002c5f;
+}
+</style>

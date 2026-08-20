@@ -4,52 +4,70 @@ import HyundaiLogo from '../components/guide/HyundaiLogo.vue'
 
 const menuItems = ['모델', '구매/이벤트', '서비스/멤버십', '디지털/고객지원', '브랜드', 'Shop']
 
-const code = `<v-toolbar color="white" elevation="0" height="64" class="header-preview-toolbar">
-  <HyundaiLogo class="ml-4" />
+const code = `<script setup>
+import HyundaiLogo from '../components/guide/HyundaiLogo.vue'
+import { useDisplay } from 'vuetify'
 
-  <template v-if="viewport === 'desktop'">
-    <div class="d-flex ga-6 ml-8">
-      <v-btn v-for="item in menuItems" :key="item" variant="text" size="small">
-        {{ item }}
-      </v-btn>
-    </div>
-  </template>
+const { mdAndUp } = useDisplay()
 
-  <v-spacer />
+const menuItems = ['모델', '구매/이벤트', '서비스/멤버십', '디지털/고객지원', '브랜드', 'Shop']
+<\/script>
 
-  <template v-if="viewport === 'desktop'">
-    <v-btn variant="text" size="small" class="font-weight-bold">내차 추천받기</v-btn>
+<template>
+  <v-toolbar color="white" elevation="0" height="64" class="header-preview-toolbar">
+    <HyundaiLogo class="ml-4" />
 
-    <v-menu open-on-hover>
-      <template #activator="{ props }">
-        <v-btn v-bind="props" variant="text" size="small" append-icon="mdi-menu-down">
-          KR
+    <template v-if="mdAndUp">
+      <div class="d-flex ga-6 ml-8">
+        <v-btn v-for="item in menuItems" :key="item" variant="text" size="small">
+          {{ item }}
         </v-btn>
-      </template>
-      <v-list density="compact">
-        <v-list-item title="EN" />
-        <v-list-item title="CN" />
-        <v-list-item title="월드와이드" />
-        <v-list-item title="상용글로벌" />
-      </v-list>
-    </v-menu>
+      </div>
+    </template>
 
-    <v-divider vertical class="mx-1" />
+    <v-spacer />
 
-    <v-menu open-on-hover>
-      <template #activator="{ props }">
-        <v-btn v-bind="props" icon="mdi-account-outline" variant="text" size="small" />
-      </template>
-      <v-list density="compact">
-        <v-list-item title="개인 로그인" append-icon="mdi-chevron-right" />
-        <v-list-item title="법인 로그인" append-icon="mdi-chevron-right" />
-      </v-list>
-    </v-menu>
-  </template>
+    <template v-if="mdAndUp">
+      <v-btn variant="text" size="small" class="font-weight-bold">내차 추천받기</v-btn>
 
-  <v-btn icon="mdi-magnify" variant="text" />
-  <v-btn icon="mdi-menu" variant="text" class="ml-2" />
-</v-toolbar>`
+      <v-menu open-on-hover>
+        <template #activator="{ props }">
+          <v-btn v-bind="props" variant="text" size="small" append-icon="mdi-menu-down">
+            KR
+          </v-btn>
+        </template>
+        <v-list density="compact">
+          <v-list-item title="EN" />
+          <v-list-item title="CN" />
+          <v-list-item title="월드와이드" />
+          <v-list-item title="상용글로벌" />
+        </v-list>
+      </v-menu>
+
+      <v-divider vertical class="mx-1" />
+
+      <v-menu open-on-hover>
+        <template #activator="{ props }">
+          <v-btn v-bind="props" icon="mdi-account-outline" variant="text" size="small" />
+        </template>
+        <v-list density="compact">
+          <v-list-item title="개인 로그인" append-icon="mdi-chevron-right" />
+          <v-list-item title="법인 로그인" append-icon="mdi-chevron-right" />
+        </v-list>
+      </v-menu>
+    </template>
+
+    <v-btn icon="mdi-magnify" variant="text" />
+    <v-btn icon="mdi-menu" variant="text" class="ml-2" />
+  </v-toolbar>
+</template>
+
+<style lang="scss" scoped>
+.header-preview-toolbar {
+  border-radius: 8px;
+  border-bottom: 1px solid #f6f3f2;
+}
+</style>`
 </script>
 
 <template>
@@ -62,6 +80,7 @@ const code = `<v-toolbar color="white" elevation="0" height="64" class="header-p
       열리는데, 그 패턴은 "Search Panel" 섹션에서 확인할 수 있습니다. 햄버거 버튼을
       누르면 열리는 전체 메뉴는 "Full Menu Overlay" 섹션에서 확인할 수 있습니다.
       태블릿/모바일 폭에서는 메뉴/언어/로그인을 감추고 검색·햄버거 아이콘만 남깁니다.
+      코드 탭을 복사할 땐 <code>components/guide/HyundaiLogo.vue</code>도 함께 가져가야 합니다.
     </p>
 
     <CodePreview :code="code">
