@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import CodePreview from '../components/guide/CodePreview.vue'
 import HyundaiLogo from '../components/guide/HyundaiLogo.vue'
 
@@ -39,7 +39,7 @@ const certMarks = [
   ['2025년 한국품질만족지수(KS-QEI) 조사', '12개 부문 1위', '(승용-준중형/중형/대형, SUV-소형/준중형/대형, 럭셔리-D,E세단/대형SUV, 전기차, 자동차AS, 스마트 모빌리티 서비스앱)'],
 ]
 
-const code = `<script setup>
+const code = `<script setup lang="ts">
 import HyundaiLogo from '../components/guide/HyundaiLogo.vue'
 
 const policyLinks = [
@@ -231,14 +231,16 @@ const certMarks = [
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Footer</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
+    <h1 class="text-scale-h1 mb-2">Footer</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
       어두운 배경 위에 로고, 정책 링크, 고객센터·저작권, SNS 아이콘과 Family Site
       드롭다운을 배치하고, 구분선 아래에 인증마크를 그리드로 나열한 하단 영역입니다.
-      Family Site는 <strong>클릭</strong>하면 목록이 열립니다. 인증마크의 로고 자리는
-      실제 이미지 대신 회색 플레이스홀더로 표시했습니다.
-      코드 탭을 복사할 땐 <code>components/guide/HyundaiLogo.vue</code>도 함께 가져가야 합니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>Family Site는 클릭하면 목록이 열림</li>
+      <li>인증마크의 로고 자리는 실제 이미지 대신 회색 플레이스홀더로 표시</li>
+      <li>코드 탭을 복사할 땐 <code>components/guide/HyundaiLogo.vue</code>도 함께 가져가야 함</li>
+    </ul>
 
     <CodePreview :code="code">
       <v-footer class="footer-dark d-flex flex-column pa-0" rounded="lg">

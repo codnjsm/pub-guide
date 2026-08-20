@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . && node scripts/gen-codetab.mjs --check",
+    "lint": "eslint . && vue-tsc --noEmit && node scripts/gen-codetab.mjs --check",
+    "type-check": "vue-tsc --noEmit",
     "format": "prettier --write .",
     "codetab": "node scripts/gen-codetab.mjs"
   },
@@ -24,6 +25,9 @@
     "eslint-plugin-vue": "^10.10.0",
     "prettier": "^3.9.6",
     "sass": "^1.102.0",
-    "vite": "^8.2.0"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.67.0",
+    "vite": "^8.2.0",
+    "vue-tsc": "^3.3.10"
   }
 }

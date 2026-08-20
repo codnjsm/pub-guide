@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import CodePreview from '../components/guide/CodePreview.vue'
 import carImg from '../assets/carousel-car.svg'
@@ -19,11 +19,11 @@ const playing = ref(true)
 const prevTitle = computed(() => slides[(model.value - 1 + slides.length) % slides.length].title)
 const nextTitle = computed(() => slides[(model.value + 1) % slides.length].title)
 
-function bgStyle(image) {
+function bgStyle(image: string) {
   return { backgroundImage: 'url("' + image + '")' }
 }
 
-const code = `<script setup>
+const code = `<script setup lang="ts">
 import { ref, computed } from 'vue'
 import carImg from '../assets/carousel-car.svg'
 import { useDisplay } from 'vuetify'
@@ -46,7 +46,7 @@ const playing = ref(true)
 const prevTitle = computed(() => slides[(model.value - 1 + slides.length) % slides.length].title)
 const nextTitle = computed(() => slides[(model.value + 1) % slides.length].title)
 
-function bgStyle(image) {
+function bgStyle(image: string) {
   return { backgroundImage: 'url("' + image + '")' }
 }
 <\/script>
@@ -195,13 +195,17 @@ function bgStyle(image) {
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Carousel / Slider</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
+    <h1 class="text-scale-h1 mb-2">Carousel / Slider</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
       이미지 위에 타이틀/서브타이틀이 겹쳐지고, 좌우 끝에 이전/다음 모델명이 붙은 화살표로
-      넘기는 브랜드 슬라이더 패턴입니다. 화살표는 양방향으로 순환하며, 하단 점을 클릭해도
-      해당 슬라이드로 이동합니다. 재생/일시정지 버튼으로 자동재생을 토글할 수 있습니다.
-      코드 탭을 복사할 땐 <code>assets/carousel-car.svg</code>도 함께 가져가야 합니다.
+      넘기는 브랜드 슬라이더 패턴입니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>화살표는 양방향으로 순환</li>
+      <li>하단 점을 클릭해도 해당 슬라이드로 이동</li>
+      <li>재생/일시정지 버튼으로 자동재생 토글</li>
+      <li>코드 탭을 복사할 땐 <code>assets/carousel-car.svg</code>도 함께 가져가야 함</li>
+    </ul>
 
     <CodePreview :code="code">
       <template #default="{ viewport }">

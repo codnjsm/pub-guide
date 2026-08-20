@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import CodePreview from '../components/guide/CodePreview.vue'
 
 const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
 
-const code = `<script setup>
+const code = `<script setup lang="ts">
 import { useDisplay } from 'vuetify'
 
 const { xs } = useDisplay()
@@ -130,14 +130,21 @@ const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Hero Banner</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
+    <h1 class="text-scale-h1 mb-2">Hero Banner</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
       페이지 최상단을 채우는 키 비주얼입니다. 배경 이미지 위에 breadcrumb과 서브타이틀·타이틀을
-      얹는 구성이고, 타이틀은 상단 20% 지점에서 시작합니다. 폭에 따라 배치가 바뀝니다 —
-      데스크톱·태블릿은 가로로 넓은 비율에 <strong>좌측 정렬</strong>이고 breadcrumb이 보이며,
-      모바일은 세로로 긴 비율에 <strong>중앙 정렬</strong>이고 breadcrumb을 감춥니다(뷰포트
-      토글로 확인해 보세요). 배경은 실제 이미지 대신 회색 플레이스홀더로 표시했습니다.
+      얹는 구성이고, 타이틀은 상단 20% 지점에서 시작합니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>
+        데스크톱·태블릿: 가로로 넓은 비율, 좌측 정렬, breadcrumb 표시
+      </li>
+      <li>
+        모바일: 세로로 긴 비율, 중앙 정렬, breadcrumb 숨김(뷰포트 토글로
+        확인해 보세요)
+      </li>
+      <li>배경은 실제 이미지 대신 회색 플레이스홀더로 표시</li>
+    </ul>
 
     <CodePreview :code="code">
       <template #default="{ viewport }">

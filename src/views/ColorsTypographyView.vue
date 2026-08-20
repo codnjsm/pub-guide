@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const colors = [
   {
     name: 'Primary',
@@ -39,13 +39,13 @@ const typeScale = [
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Colors / Typography</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
+    <h1 class="text-scale-h1 mb-2">Colors / Typography</h1>
+    <p class="text-scale-body text-high-emphasis mb-8">
       전체 섹션에서 공통으로 쓰는 컬러 토큰과 타이포그래피 스케일입니다.
     </p>
 
     <v-divider class="mb-10" />
-    <h2 class="text-h6 font-weight-bold mb-4">컬러 팔레트</h2>
+    <h2 class="text-scale-h3 mb-4">컬러 팔레트</h2>
     <v-row class="mb-10">
       <v-col v-for="c in colors" :key="c.name" cols="12" sm="6" md="4">
         <v-card variant="outlined" rounded="lg" class="palette-card">
@@ -53,15 +53,15 @@ const typeScale = [
           <v-card-text>
             <div class="d-flex justify-space-between align-center mb-1">
               <span class="font-weight-bold">{{ c.name }}</span>
-              <span class="text-caption text-medium-emphasis">{{ c.hex }}</span>
+              <span class="text-scale-caption text-high-emphasis">{{ c.hex }}</span>
             </div>
-            <span class="text-caption text-medium-emphasis">{{ c.desc }}</span>
+            <span class="text-scale-caption text-high-emphasis">{{ c.desc }}</span>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
 
-    <p class="text-caption text-medium-emphasis mb-2">
+    <p class="text-scale-body text-high-emphasis mb-2">
       각 색상은 <code>text-{색상}</code> / <code>bg-{색상}</code> 형태의 Vuetify 유틸리티 클래스로
       바로 쓸 수 있습니다.
     </p>
@@ -69,7 +69,7 @@ const typeScale = [
 &lt;div class="bg-primary"&gt;배경&lt;/div&gt;</code></pre>
 
     <v-divider class="mb-10" />
-    <h2 class="text-h6 font-weight-bold mb-4">타이포그래피</h2>
+    <h2 class="text-scale-h3 mb-4">타이포그래피</h2>
     <v-table class="mb-10 type-scale-table">
       <thead>
         <tr>
@@ -89,7 +89,7 @@ const typeScale = [
       </tbody>
     </v-table>
 
-    <p class="text-caption text-medium-emphasis mb-2">
+    <p class="text-scale-body text-high-emphasis mb-2">
       각 스케일은 <code>text-scale-{구분}</code> 클래스로 바로 쓸 수 있습니다.
     </p>
     <pre class="usage-example"><code>&lt;h1 class="text-scale-h1"&gt;타이틀&lt;/h1&gt;</code></pre>

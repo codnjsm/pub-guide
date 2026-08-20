@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import CodePreview from '../components/guide/CodePreview.vue'
 
@@ -17,7 +17,7 @@ const popularSearches = [
   '블루링크',
 ]
 
-const code = `<script setup>
+const code = `<script setup lang="ts">
 import { ref } from 'vue'
 
 const searchOpen = ref(true)
@@ -93,12 +93,14 @@ const popularSearches = [
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Search Panel</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
-      헤더의 검색 아이콘을 <strong>클릭</strong>하면 열리는 전체 폭 패널입니다.
-      검색창 아래 최근 검색어와 인기 검색어 Top10을 나란히 보여줍니다.
-      <code>v-expand-transition</code>으로 열고 닫히는 애니메이션을 넣었습니다.
+    <h1 class="text-scale-h1 mb-2">Search Panel</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
+      헤더의 검색 아이콘을 클릭하면 열리는 전체 폭 패널입니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>검색창 아래 최근 검색어와 인기 검색어 Top10을 나란히 표시</li>
+      <li><code>v-expand-transition</code>으로 열고 닫히는 애니메이션</li>
+    </ul>
 
     <CodePreview :code="code">
       <v-btn

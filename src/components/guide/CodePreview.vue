@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 
 defineProps({
@@ -13,7 +13,7 @@ const viewportWidth = computed(
   () => ({ desktop: '100%', tablet: '768px', mobile: '375px' })[viewport.value],
 )
 
-async function copyCode(code) {
+async function copyCode(code: string) {
   await navigator.clipboard.writeText(code)
   copied.value = true
   setTimeout(() => (copied.value = false), 1500)

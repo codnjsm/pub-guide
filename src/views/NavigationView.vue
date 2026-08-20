@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import CodePreview from '../components/guide/CodePreview.vue'
 
@@ -28,7 +28,7 @@ const pages = computed(() => {
 
 const currentPage = ref(0)
 
-function goToPage(index) {
+function goToPage(index: number) {
   currentPage.value = index
 }
 function nextPage() {
@@ -38,7 +38,7 @@ function prevPage() {
   currentPage.value = (currentPage.value - 1 + pages.value.length) % pages.value.length
 }
 
-const code = `<script setup>
+const code = `<script setup lang="ts">
 import { ref, computed } from 'vue'
 
 const items = [
@@ -67,7 +67,7 @@ const pages = computed(() => {
 
 const currentPage = ref(0)
 
-function goToPage(index) {
+function goToPage(index: number) {
   currentPage.value = index
 }
 function nextPage() {
@@ -151,12 +151,15 @@ function prevPage() {
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Slide Navigation</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
+    <h1 class="text-scale-h1 mb-2">Slide Navigation</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
       주요 카테고리를 아이콘+라벨 그리드로 배치하고, 좌우 화살표 버튼과 하단 점 인디케이터로
-      페이지를 넘길 수 있는 패턴입니다. 화살표는 양방향으로 순환하며(마지막 페이지에서 다음 → 첫
-      페이지), 점을 클릭해도 해당 페이지로 바로 이동합니다.
+      페이지를 넘길 수 있는 패턴입니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>화살표는 양방향으로 순환(마지막 페이지에서 다음 → 첫 페이지)</li>
+      <li>점을 클릭해도 해당 페이지로 바로 이동</li>
+    </ul>
 
     <CodePreview :code="code">
       <div class="nav-pagination">

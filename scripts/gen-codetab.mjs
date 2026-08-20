@@ -88,12 +88,13 @@ function applyViewport(file, script, tpl) {
 
 // 뷰 파일 전체에서, 코드 탭에 들어갈 완성 컴포넌트 문자열을 만든다
 function buildCode(file, source) {
-  const script = /<script setup>\n([\s\S]*?)\n<\/script>/.exec(source)
+  const script = /<script setup( lang="ts")?>\n([\s\S]*?)\n<\/script>/.exec(source)
   const preview = /<CodePreview[^>]*>\n([\s\S]*?)\n\s*<\/CodePreview>/.exec(source)
   if (!script || !preview) return null
+  const langAttr = script[1] || ''
 
   // 가이드 배관은 뺀다 — CodePreview import와 기존 code 변수
-  let compScript = script[1]
+  let compScript = script[2]
     .replace(/^import CodePreview from '[^']*'\n/m, '')
     .replace(/\n*const code = (`[\s\S]*?`|'[^']*'|"[^"]*")\s*$/, '')
     .replace(/^\n+|\n+$/g, '')
@@ -107,7 +108,10 @@ function buildCode(file, source) {
   // 낡은 사본이 먼저 걸려, 실제 스타일을 고쳐도 반영되지 않는다(그리고 --check는 통과해버린다)
   const afterScript = source.slice(script.index + script[0].length)
   const style = /(<style lang="scss" scoped>\n[\s\S]*?\n<\/style>)/.exec(afterScript)
-  const parts = [`<script setup>\n${compScript}\n</script>`, `<template>\n${indent(tpl, 2)}\n</template>`]
+  const parts = [
+    `<script setup${langAttr}>\n${compScript}\n</script>`,
+    `<template>\n${indent(tpl, 2)}\n</template>`,
+  ]
   if (style) parts.push(style[1])
 
   return { script, code: parts.join('\n\n') }
@@ -122,11 +126,11 @@ function render(source, script, code) {
     .replaceAll('`', '\\`')
     .replaceAll('${', '\\${')
     .replaceAll('</script>', '<\\/script>')
-  const kept = script[1]
+  const kept = script[2]
     .replace(/\n*const code = (`[\s\S]*?`|'[^']*'|"[^"]*")\s*$/, '')
     .replace(/\n+$/, '')
-  const start = source.indexOf(script[1])
-  return source.slice(0, start) + `${kept}\n\nconst code = \`${escaped}\`` + source.slice(start + script[1].length)
+  const start = source.indexOf(script[2])
+  return source.slice(0, start) + `${kept}\n\nconst code = \`${escaped}\`` + source.slice(start + script[2].length)
 }
 
 const check = process.argv.includes('--check')

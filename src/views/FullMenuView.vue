@@ -1,5 +1,5 @@
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { ref, type ComponentPublicInstance } from 'vue'
 import CodePreview from '../components/guide/CodePreview.vue'
 
 const menuTabs = [
@@ -258,18 +258,18 @@ const menuTabs = [
 
 const open = ref(true)
 const query = ref('')
-const sectionRefs = ref({})
+const sectionRefs = ref<Record<string, Element>>({})
 
-function setSectionRef(id, el) {
-  if (el) sectionRefs.value[id] = el
+function setSectionRef(id: string, el: Element | ComponentPublicInstance | null) {
+  if (el instanceof Element) sectionRefs.value[id] = el
 }
 
-function scrollToSection(id) {
+function scrollToSection(id: string) {
   sectionRefs.value[id]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-const code = `<script setup>
-import { ref } from 'vue'
+const code = `<script setup lang="ts">
+import { ref, type ComponentPublicInstance } from 'vue'
 
 const menuTabs = [
   {
@@ -527,13 +527,13 @@ const menuTabs = [
 
 const open = ref(true)
 const query = ref('')
-const sectionRefs = ref({})
+const sectionRefs = ref<Record<string, Element>>({})
 
-function setSectionRef(id, el) {
-  if (el) sectionRefs.value[id] = el
+function setSectionRef(id: string, el: Element | ComponentPublicInstance | null) {
+  if (el instanceof Element) sectionRefs.value[id] = el
 }
 
-function scrollToSection(id) {
+function scrollToSection(id: string) {
   sectionRefs.value[id]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 <\/script>
@@ -692,14 +692,17 @@ function scrollToSection(id) {
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Full Menu Overlay</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
+    <h1 class="text-scale-h1 mb-2">Full Menu Overlay</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
       헤더의 메뉴 버튼을 누르면 전체 화면을 덮는 형태로 모든 카테고리를 한눈에 보여주는
-      패턴입니다. 상단에 검색창과 닫기 버튼, 그 아래 어두운 1depth 탭 바가 있고, 본문에는
-      6개 섹션이 세로로 쌓여 카테고리별 링크가 다단 그리드로 배치됩니다. 탭 바의 항목을
-      <strong>클릭</strong>하면 해당 섹션으로 스크롤되고, 우측 상단 버튼으로 메뉴를 열고
-      닫습니다. 링크 항목은 패턴 전달에 필요한 만큼만 추려서 넣었습니다.
+      패턴입니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>상단 검색창 + 닫기 버튼, 그 아래 어두운 탭 바, 본문은 6개 섹션이 다단 그리드로 배치</li>
+      <li>탭 바의 항목을 클릭하면 해당 섹션으로 스크롤</li>
+      <li>우측 상단 버튼으로 메뉴를 열고 닫음</li>
+      <li>링크 항목은 패턴 전달에 필요한 만큼만 추려서 넣음</li>
+    </ul>
 
     <CodePreview :code="code">
       <div class="d-flex justify-end">

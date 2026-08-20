@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useDisplay } from 'vuetify'
 import { useRoute } from 'vue-router'
@@ -135,7 +135,7 @@ watch(
 }
 
 .text-scale-caption {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 20px;
   font-weight: 400;
 }

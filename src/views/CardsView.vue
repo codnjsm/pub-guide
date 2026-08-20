@@ -1,7 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import CodePreview from '../components/guide/CodePreview.vue'
 
-const categories = [
+const categories: {
+  title: string
+  items: {
+    title: string
+    subtitle: string
+    badges: { badge?: boolean; description?: string; link?: string }
+  }[]
+}[] = [
   {
     title: 'Category 1',
     items: [
@@ -37,8 +44,15 @@ const categories = [
   },
 ]
 
-const code = `<script setup>
-const categories = [
+const code = `<script setup lang="ts">
+const categories: {
+  title: string
+  items: {
+    title: string
+    subtitle: string
+    badges: { badge?: boolean; description?: string; link?: string }
+  }[]
+}[] = [
   {
     title: 'Category 1',
     items: [
@@ -210,13 +224,17 @@ const categories = [
 
 <template>
   <v-container class="guide-container">
-    <h1 class="text-h5 font-weight-bold mb-2">Cards</h1>
-    <p class="text-body-2 text-medium-emphasis mb-8">
-      카테고리별로 항목을 나열하는 사각형 카드 그리드입니다. 이미지 · 타이틀 · 서브타이틀 순으로
-      배치하고, <strong>마우스를 올리면</strong> 배경이 옅은 색으로 바뀝니다.
-      <strong>클릭하면 새 탭으로 이동</strong>합니다. 이미지 위 코너 배지 하나와, 아이콘이 있거나
-      없는 인라인 배지 두 종류도 함께 보여줍니다. 실제 이미지 대신 회색 플레이스홀더로 표시했습니다.
+    <h1 class="text-scale-h1 mb-2">Cards</h1>
+    <p class="text-scale-body text-high-emphasis mb-2">
+      카테고리별로 항목을 나열하는 사각형 카드 그리드입니다.
     </p>
+    <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
+      <li>이미지 · 타이틀 · 서브타이틀 순으로 배치</li>
+      <li>마우스를 올리면 배경이 옅은 색으로 바뀜</li>
+      <li>클릭하면 새 탭으로 이동</li>
+      <li>이미지 위 코너 배지 하나와, 아이콘이 있거나 없는 인라인 배지 두 종류</li>
+      <li>실제 이미지 대신 회색 플레이스홀더로 표시</li>
+    </ul>
 
     <CodePreview :code="code">
       <div class="cards">

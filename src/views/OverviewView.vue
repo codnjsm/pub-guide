@@ -1,15 +1,15 @@
 <template>
   <v-container class="guide-container">
     <div class="mb-10">
-      <h1 class="text-h4 font-weight-bold mb-2">Overview</h1>
-      <p class="text-body-1 text-medium-emphasis">
+      <h1 class="text-scale-h1 mb-2">Overview</h1>
+      <p class="text-scale-body text-high-emphasis">
         현대자동차 홈페이지(hyundai.com/kr/ko/e)의 레이아웃 패턴을 참고하여 정리한 컴포넌트 퍼블리싱
         가이드입니다.<br />왼쪽 메뉴에서 섹션별 마크업과 코드를 확인할 수 있습니다.
       </p>
     </div>
 
     <v-divider class="mb-10" />
-    <h2 class="text-h6 font-weight-bold mb-4">사용 기술</h2>
+    <h2 class="text-scale-h3 mb-4">사용 기술</h2>
     <v-sheet border rounded="lg" class="mb-10 pa-2">
       <v-list density="comfortable">
         <v-list-item prepend-icon="mdi-vuejs" title="Vue 3" subtitle="UI 프레임워크" />
@@ -26,7 +26,7 @@
     </v-sheet>
 
     <v-divider class="mb-10" />
-    <h2 class="text-h6 font-weight-bold mb-4">폴더 구조</h2>
+    <h2 class="text-scale-h3 mb-4">폴더 구조</h2>
     <pre class="folder-tree">
       <code>
 pub-guide/
@@ -69,8 +69,8 @@ pub-guide/
     </pre>
 
     <v-divider class="mb-10" />
-    <h2 class="text-h6 font-weight-bold mb-4">새 가이드 추가하는 법</h2>
-    <ol class="text-body-2 pl-5">
+    <h2 class="text-scale-h3 mb-4">새 가이드 추가하는 법</h2>
+    <ol class="text-scale-body pl-5">
       <li>
         <code>src/views/</code>에 새 <code>XxxView.vue</code> 작성 (다른 섹션 페이지처럼
         <code>CodePreview</code>로 미리보기/코드 감싸기)
