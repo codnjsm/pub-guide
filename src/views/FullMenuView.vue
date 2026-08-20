@@ -60,7 +60,12 @@ const menuTabs = [
       },
       {
         title: '버스',
-        links: [{ label: '쏠라티' }, { label: '카운티' }, { label: '일렉시티' }, { label: '유니버스' }],
+        links: [
+          { label: '쏠라티' },
+          { label: '카운티' },
+          { label: '일렉시티' },
+          { label: '유니버스' },
+        ],
       },
     ],
   },
@@ -142,7 +147,11 @@ const menuTabs = [
       },
       {
         title: '블루핸즈 가맹사업',
-        links: [{ label: '가맹사업 소개' }, { label: '가맹점 개설 안내' }, { label: '가맹점 모집' }],
+        links: [
+          { label: '가맹사업 소개' },
+          { label: '가맹점 개설 안내' },
+          { label: '가맹점 모집' },
+        ],
       },
       {
         title: '전기차/수소차',
@@ -242,15 +251,14 @@ const menuTabs = [
       },
       {
         title: 'IR 정보',
-        links: [{ label: 'IR 정보', external: true }, { label: '배당조회', external: true }],
+        links: [
+          { label: 'IR 정보', external: true },
+          { label: '배당조회', external: true },
+        ],
       },
       {
         title: '지속가능 경영',
-        links: [
-          { label: '지속가능 경영' },
-          { label: 'CSV 소개' },
-          { label: '지속가능성보고서' },
-        ],
+        links: [{ label: '지속가능 경영' }, { label: 'CSV 소개' }, { label: '지속가능성보고서' }],
       },
     ],
   },
@@ -329,7 +337,12 @@ const menuTabs = [
       },
       {
         title: '버스',
-        links: [{ label: '쏠라티' }, { label: '카운티' }, { label: '일렉시티' }, { label: '유니버스' }],
+        links: [
+          { label: '쏠라티' },
+          { label: '카운티' },
+          { label: '일렉시티' },
+          { label: '유니버스' },
+        ],
       },
     ],
   },
@@ -411,7 +424,11 @@ const menuTabs = [
       },
       {
         title: '블루핸즈 가맹사업',
-        links: [{ label: '가맹사업 소개' }, { label: '가맹점 개설 안내' }, { label: '가맹점 모집' }],
+        links: [
+          { label: '가맹사업 소개' },
+          { label: '가맹점 개설 안내' },
+          { label: '가맹점 모집' },
+        ],
       },
       {
         title: '전기차/수소차',
@@ -511,15 +528,14 @@ const menuTabs = [
       },
       {
         title: 'IR 정보',
-        links: [{ label: 'IR 정보', external: true }, { label: '배당조회', external: true }],
+        links: [
+          { label: 'IR 정보', external: true },
+          { label: '배당조회', external: true },
+        ],
       },
       {
         title: '지속가능 경영',
-        links: [
-          { label: '지속가능 경영' },
-          { label: 'CSV 소개' },
-          { label: '지속가능성보고서' },
-        ],
+        links: [{ label: '지속가능 경영' }, { label: 'CSV 소개' }, { label: '지속가능성보고서' }],
       },
     ],
   },
@@ -694,14 +710,12 @@ function scrollToSection(id: string) {
   <v-container class="guide-container">
     <h1 class="text-scale-h1 mb-2">Full Menu Overlay</h1>
     <p class="text-scale-body text-high-emphasis mb-2">
-      헤더의 메뉴 버튼을 누르면 전체 화면을 덮는 형태로 모든 카테고리를 한눈에 보여주는
-      패턴입니다.
+      헤더의 메뉴 버튼을 누르면 전체 화면을 덮는 형태로 모든 카테고리를 한눈에 보여주는 패턴입니다.
     </p>
     <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
       <li>상단 검색창 + 닫기 버튼, 그 아래 어두운 탭 바, 본문은 6개 섹션이 다단 그리드로 배치</li>
       <li>탭 바의 항목을 클릭하면 해당 섹션으로 스크롤</li>
       <li>우측 상단 버튼으로 메뉴를 열고 닫음</li>
-      <li>링크 항목은 패턴 전달에 필요한 만큼만 추려서 넣음</li>
     </ul>
 
     <CodePreview :code="code">

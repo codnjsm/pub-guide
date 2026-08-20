@@ -77,10 +77,9 @@ const menuItems = ['모델', '구매/이벤트', '서비스/멤버십', '디지�
       로고, 인라인 메뉴, 언어 선택, 로그인, 검색, 전체 메뉴로 구성된 상단 영역입니다.
     </p>
     <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
-      <li>언어 선택·로그인은 호버 시 드롭다운이 열림(마우스를 올려보세요)</li>
+      <li>언어 선택·로그인은 호버 시 드롭다운이 열림</li>
       <li>
-        검색·햄버거 아이콘을 클릭하면 각각 "Search Panel"·"Full Menu Overlay"
-        섹션의 패턴이 열림
+        검색·햄버거 아이콘을 클릭하면 각각 "Search Panel"·"Full Menu Overlay" 섹션의 패턴이 열림
       </li>
       <li>태블릿/모바일 폭에서는 검색·햄버거 아이콘만 남김</li>
       <li>코드 탭을 복사할 땐 <code>components/guide/HyundaiLogo.vue</code>도 함께 가져가야 함</li>

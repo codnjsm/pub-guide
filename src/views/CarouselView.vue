@@ -53,7 +53,13 @@ function bgStyle(image: string) {
 
 <template>
   <div>
-    <v-carousel v-model="model" :cycle="playing" height="420" hide-delimiters class="carousel-preview">
+    <v-carousel
+      v-model="model"
+      :cycle="playing"
+      height="420"
+      hide-delimiters
+      class="carousel-preview"
+    >
       <template #prev="{ props }">
         <button class="carousel-nav carousel-nav--prev" @click="props.onClick">
           <v-icon icon="mdi-chevron-left" size="20" />
@@ -197,20 +203,26 @@ function bgStyle(image: string) {
   <v-container class="guide-container">
     <h1 class="text-scale-h1 mb-2">Carousel / Slider</h1>
     <p class="text-scale-body text-high-emphasis mb-2">
-      이미지 위에 타이틀/서브타이틀이 겹쳐지고, 좌우 끝에 이전/다음 모델명이 붙은 화살표로
-      넘기는 브랜드 슬라이더 패턴입니다.
+      이미지 위에 타이틀/서브타이틀이 겹쳐지고, 좌우 끝에 이전/다음 모델명이 붙은 화살표로 넘기는
+      브랜드 슬라이더 패턴입니다.
     </p>
     <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
       <li>화살표는 양방향으로 순환</li>
       <li>하단 점을 클릭해도 해당 슬라이드로 이동</li>
       <li>재생/일시정지 버튼으로 자동재생 토글</li>
-      <li>코드 탭을 복사할 땐 <code>assets/carousel-car.svg</code>도 함께 가져가야 함</li>
+      <li>배경은 실제 이미지 대신 아이콘으로 표시</li>
     </ul>
 
     <CodePreview :code="code">
       <template #default="{ viewport }">
         <div>
-          <v-carousel v-model="model" :cycle="playing" height="420" hide-delimiters class="carousel-preview">
+          <v-carousel
+            v-model="model"
+            :cycle="playing"
+            height="420"
+            hide-delimiters
+            class="carousel-preview"
+          >
             <template #prev="{ props }">
               <button class="carousel-nav carousel-nav--prev" @click="props.onClick">
                 <v-icon icon="mdi-chevron-left" size="20" />

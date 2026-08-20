@@ -90,12 +90,7 @@ function prevPage() {
         </div>
       </div>
 
-      <v-btn
-        icon="mdi-chevron-right"
-        variant="text"
-        density="comfortable"
-        @click="nextPage"
-      />
+      <v-btn icon="mdi-chevron-right" variant="text" density="comfortable" @click="nextPage" />
     </div>
 
     <div class="d-flex justify-center mt-4">
@@ -157,7 +152,7 @@ function prevPage() {
       페이지를 넘길 수 있는 패턴입니다.
     </p>
     <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
-      <li>화살표는 양방향으로 순환(마지막 페이지에서 다음 → 첫 페이지)</li>
+      <li>화살표는 양방향으로 순환 (마지막 페이지에서 다음 → 첫 페이지)</li>
       <li>점을 클릭해도 해당 페이지로 바로 이동</li>
     </ul>
 
@@ -173,12 +168,7 @@ function prevPage() {
             </div>
           </div>
 
-          <v-btn
-            icon="mdi-chevron-right"
-            variant="text"
-            density="comfortable"
-            @click="nextPage"
-          />
+          <v-btn icon="mdi-chevron-right" variant="text" density="comfortable" @click="nextPage" />
         </div>
 
         <div class="d-flex justify-center mt-4">

@@ -13,7 +13,11 @@ const categories: {
     title: 'Category 1',
     items: [
       { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
-      { title: 'title2', subtitle: 'subtitle2', badges: { badge: true, description: 'description1' } },
+      {
+        title: 'title2',
+        subtitle: 'subtitle2',
+        badges: { badge: true, description: 'description1' },
+      },
       { title: 'title3', subtitle: 'subtitle3', badges: { badge: true, link: 'link1' } },
       { title: 'title4', subtitle: 'subtitle4', badges: {} },
       { title: 'title5', subtitle: 'subtitle5', badges: {} },
@@ -57,7 +61,11 @@ const categories: {
     title: 'Category 1',
     items: [
       { title: 'title1', subtitle: 'subtitle1', badges: { badge: true } },
-      { title: 'title2', subtitle: 'subtitle2', badges: { badge: true, description: 'description1' } },
+      {
+        title: 'title2',
+        subtitle: 'subtitle2',
+        badges: { badge: true, description: 'description1' },
+      },
       { title: 'title3', subtitle: 'subtitle3', badges: { badge: true, link: 'link1' } },
       { title: 'title4', subtitle: 'subtitle4', badges: {} },
       { title: 'title5', subtitle: 'subtitle5', badges: {} },
@@ -230,8 +238,8 @@ const categories: {
     </p>
     <ul class="text-scale-body text-high-emphasis pl-5 mb-8">
       <li>이미지 · 타이틀 · 서브타이틀 순으로 배치</li>
-      <li>마우스를 올리면 배경이 옅은 색으로 바뀜</li>
-      <li>클릭하면 새 탭으로 이동</li>
+      <li>호버시 배경이 옅은 색으로 바뀜</li>
+      <li>클릭하면 새 창으로 링크 열림</li>
       <li>이미지 위 코너 배지 하나와, 아이콘이 있거나 없는 인라인 배지 두 종류</li>
       <li>실제 이미지 대신 회색 플레이스홀더로 표시</li>
     </ul>

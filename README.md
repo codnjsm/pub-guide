@@ -9,16 +9,18 @@ hyundai.com(kr/ko/e) 페이지의 UI 패턴을 참고해 Vue 3 + Vuetify로 재�
 
 ```bash
 npm install
-npm run dev      # 개발 서버
-npm run build    # 프로덕션 빌드
-npm run lint     # ESLint + 코드 탭 동기화 검사
-npm run codetab  # 코드 탭 재생성
-npm run format   # Prettier
+npm run dev         # 개발 서버
+npm run build       # 프로덕션 빌드
+npm run lint        # ESLint + 타입 체크 + 코드 탭 동기화 검사
+npm run type-check  # vue-tsc 타입 체크만
+npm run codetab     # 코드 탭 재생성
+npm run format      # Prettier
 ```
 
 ## 사용 기술
 
 - Vue 3 — UI 프레임워크
+- TypeScript — 정적 타입
 - Vuetify — 컴포넌트 라이브러리
 - Vue Router — 라우팅
 - Vite — 빌드 도구
@@ -34,16 +36,16 @@ pub-guide/
 │   └── icons.svg
 ├── src/
 │   ├── App.vue                       # 최상위 레이아웃 (앱바 + 좌측 네비게이션 드로어)
-│   ├── main.js                       # 앱 진입점 (router, vuetify 플러그인 등록)
+│   ├── main.ts                       # 앱 진입점 (router, vuetify 플러그인 등록)
 │   ├── assets/
 │   │   ├── carousel-car.svg          # Carousel 섹션 차량 실루엣 SVG
 │   │   └── hero.png                  # Cards 섹션 예시 이미지
 │   ├── plugins/
-│   │   └── vuetify.js                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
+│   │   └── vuetify.ts                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
 │   ├── router/
-│   │   └── index.js                  # 섹션별 라우트 정의
+│   │   └── index.ts                  # 섹션별 라우트 정의
 │   ├── data/
-│   │   └── navItems.js               # 좌측 네비게이션 메뉴 목록
+│   │   └── navItems.ts               # 좌측 네비게이션 메뉴 목록
 │   ├── components/
 │   │   └── guide/
 │   │       ├── CodePreview.vue       # 미리보기/코드 탭 전환 + 반응형 뷰포트 토글 (공용 컴포넌트)
@@ -63,7 +65,8 @@ pub-guide/
 │   └── gen-codetab.mjs               # 각 섹션 페이지의 코드 탭을 뷰 내용에서 재생성 (npm run codetab)
 ├── eslint.config.js
 ├── .prettierrc
-└── vite.config.js
+├── tsconfig.json
+└── vite.config.ts
 ```
 
 ## 스타일링 규칙
@@ -76,7 +79,7 @@ pub-guide/
 - 같은 이유로, `App.vue`의 전역 `.v-container { padding: 30px }`이 **모든** `v-container`의 패딩을 고정한다 — 개별 `v-container`에 `py-*`/`px-*` 유틸리티를 줘도 조용히 무시된다. 특정 섹션에서 다른 패딩이 필요하면 그 컨테이너 전용 scoped 클래스로 지정한다(예: `FooterView.vue`의 `.footer-inner`).
 - import한 이미지(특히 작은 SVG)를 배경으로 쓸 때 `:style="{ backgroundImage: \`url(${변수})\` }"`처럼 따옴표 없이 감싸지 않는다 — Vite가 작은 SVG를 data URI로 인라인하면 그 안의 홑따옴표가 `url()`과 충돌해 CSS가 깨진다. 항상 `url("${변수}")`처럼 따옴표로 감싼다(필요하면 헬퍼 함수로 분리).
 - **각 섹션 페이지의 "코드" 탭 예시 문자열(`code` 변수)은 복사해서 붙여넣으면 프리뷰와 같은 컴포넌트가 나오는 완성된 `.vue` 파일 한 장이어야 한다.** 구체적으로:
-  - `<script setup>` + `<template>` + `<style lang="scss" scoped>` 세 블록을 **모두** 담는다. 데이터·ref·함수도 줄이지 않고 그대로 넣는다 — 커스텀 클래스 정의가 빠지면 스타일이 조금 다른 게 아니라 **구조가 다른 화면**이 나온다(예: `.fullmenu__links`가 없으면 가로로 흐르던 링크가 세로로 쌓인다).
+  - `<script setup lang="ts">` + `<template>` + `<style lang="scss" scoped>` 세 블록을 **모두** 담는다. 데이터·ref·함수도 줄이지 않고 그대로 넣는다 — 커스텀 클래스 정의가 빠지면 스타일이 조금 다른 게 아니라 **구조가 다른 화면**이 나온다(예: `.fullmenu__links`가 없으면 가로로 흐르던 링크가 세로로 쌓인다).
   - 가이드 껍데기는 **뺀다** — `<v-container class="guide-container">`, `<h1>`, 설명문 `<p>`, `<CodePreview>` 자체.
   - `CodePreview`가 넘겨주는 `viewport` slot prop은 **코드 탭에 남기지 않는다** — 사용자 프로젝트엔 `CodePreview`가 없어 undefined가 된다. Vuetify `useDisplay()`로 옮겨 적는다(프리뷰 폭 기준: desktop→`mdAndUp`, mobile→`xs`).
   - 프로젝트 전용 파일을 import하는 경우(`HyundaiLogo.vue`, `hero.png`, `carousel-car.svg`) import 문은 그대로 두고, **그 페이지 설명문에 함께 가져가야 할 파일을 명시한다.**

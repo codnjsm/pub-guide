@@ -45,7 +45,7 @@ const typeScale = [
     </p>
 
     <v-divider class="mb-10" />
-    <h2 class="text-scale-h3 mb-4">컬러 팔레트</h2>
+    <h2 class="text-scale-h3 mb-4">Colors</h2>
     <v-row class="mb-10">
       <v-col v-for="c in colors" :key="c.name" cols="12" sm="6" md="4">
         <v-card variant="outlined" rounded="lg" class="palette-card">
@@ -69,7 +69,7 @@ const typeScale = [
 &lt;div class="bg-primary"&gt;배경&lt;/div&gt;</code></pre>
 
     <v-divider class="mb-10" />
-    <h2 class="text-scale-h3 mb-4">타이포그래피</h2>
+    <h2 class="text-scale-h3 mb-4">Typography</h2>
     <v-table class="mb-10 type-scale-table">
       <thead>
         <tr>
