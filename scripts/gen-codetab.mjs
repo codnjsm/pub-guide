@@ -112,14 +112,17 @@ function stripBacktickConst(text, name) {
 
 // script 본문을 최상위 const/type 선언 단위로 쪼갠다 — 각 CodePreview 블록에 실제로 쓰인
 // 선언만 골라 넣기 위함 (한 파일에 CodePreview가 여러 개일 때)
+const DECL_KEYWORDS = 'const|let|type|function|class|interface|enum'
+
 function splitTopLevelDecls(scriptBody) {
   const lines = scriptBody.split('\n')
   const decls = []
   let cur = null
   for (const line of lines) {
-    if (/^(const|type)\s+\w+\b/.test(line)) {
+    const m = new RegExp(`^(?:${DECL_KEYWORDS})\\s+(\\w+)`).exec(line)
+    if (m) {
       if (cur) decls.push(cur)
-      cur = { name: /^(?:const|type)\s+(\w+)/.exec(line)[1], lines: [line] }
+      cur = { name: m[1], lines: [line] }
     } else if (cur) {
       cur.lines.push(line)
     }

@@ -51,7 +51,7 @@ const ctaVariants = [
 <template>
   <div class="buttons">
     <div class="buttons__row">
-      <div v-for="item in ctaItems" :key="item.caption" class="buttons__item">
+      <div v-for="item in ctaItems" :key="item.text" class="buttons__item">
         <v-btn color="primary" variant="flat">{{ item.text }}</v-btn>
         <span class="buttons__caption">{{ item.caption }}</span>
       </div>
@@ -117,7 +117,7 @@ const textLinkVariants = [
 <template>
   <div class="buttons">
     <div class="buttons__row">
-      <div v-for="item in textLinkItems" :key="item.caption" class="buttons__item">
+      <div v-for="item in textLinkItems" :key="item.text" class="buttons__item">
         <v-btn variant="text" size="small" append-icon="mdi-arrow-right">{{ item.text }}</v-btn>
         <span class="buttons__caption">{{ item.caption }}</span>
       </div>
@@ -249,7 +249,7 @@ const navIconVariants = [
     <CodePreview :code="ctaCode">
       <div class="buttons">
         <div class="buttons__row">
-          <div v-for="item in ctaItems" :key="item.caption" class="buttons__item">
+          <div v-for="item in ctaItems" :key="item.text" class="buttons__item">
             <v-btn color="primary" variant="flat">{{ item.text }}</v-btn>
             <span class="buttons__caption">{{ item.caption }}</span>
           </div>
@@ -269,7 +269,7 @@ const navIconVariants = [
     <CodePreview :code="textLinkCode">
       <div class="buttons">
         <div class="buttons__row">
-          <div v-for="item in textLinkItems" :key="item.caption" class="buttons__item">
+          <div v-for="item in textLinkItems" :key="item.text" class="buttons__item">
             <v-btn variant="text" size="small" append-icon="mdi-arrow-right">{{ item.text }}</v-btn>
             <span class="buttons__caption">{{ item.caption }}</span>
           </div>

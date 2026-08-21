@@ -5,9 +5,9 @@ import { useRoute } from 'vue-router'
 import { navItems } from './data/navItems'
 import HyundaiLogo from './components/guide/HyundaiLogo.vue'
 
-const drawer = ref(true)
 const route = useRoute()
 const { mobile, xs } = useDisplay()
+const drawer = ref(!mobile.value)
 
 watch(
   () => drawer.value && mobile.value,
