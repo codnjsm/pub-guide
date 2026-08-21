@@ -75,7 +75,7 @@ pub-guide/
 
     <v-divider class="mb-10" />
     <h2 class="text-scale-h3 mb-4">새 가이드 추가하는 법</h2>
-    <ol class="text-scale-body pl-5">
+    <ol class="text-scale-body pl-5 mb-10">
       <li>
         <code>src/views/</code>에 새 <code>XxxView.vue</code> 작성 (다른 섹션 페이지처럼
         <code>CodePreview</code>로 미리보기/코드 감싸기)
