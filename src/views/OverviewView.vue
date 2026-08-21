@@ -87,6 +87,20 @@ pub-guide/
         평탄한 선택자만 사용
       </li>
     </ol>
+
+    <v-divider class="mb-10" />
+    <h2 class="text-scale-h3 mb-4">개발 명령어</h2>
+    <pre class="folder-tree">
+      <code>
+npm install
+npm run dev         # 개발 서버
+npm run build        # 프로덕션 빌드
+npm run lint         # ESLint + 타입 체크 + 코드 탭 동기화 검사
+npm run type-check   # vue-tsc 타입 체크만
+npm run codetab      # 코드 탭 재생성
+npm run format       # Prettier
+      </code>
+    </pre>
   </v-container>
 </template>
 

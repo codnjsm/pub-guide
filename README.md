@@ -5,7 +5,7 @@ hyundai.com(kr/ko/e) 페이지의 UI 패턴을 참고해 Vue 3 + Vuetify로 재�
 - 저장소: https://github.com/codnjsm/pub-guide
 - 화면 링크 (GitHub Pages): https://codnjsm.github.io/pub-guide/
 
-## 실행
+## 개발 명령어
 
 ```bash
 npm install
