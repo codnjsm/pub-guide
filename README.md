@@ -52,6 +52,7 @@ pub-guide/
 │   └── views/                        # 섹션 페이지 (현대차 UI 패턴 1개당 1개 파일)
 │       ├── OverviewView.vue          # Overview
 │       ├── ColorsTypographyView.vue  # Colors / Typography
+│       ├── ButtonsView.vue           # Buttons
 │       ├── HeaderView.vue            # Header / GNB
 │       ├── NavigationView.vue        # Slide Navigation
 │       ├── HeroView.vue              # Hero Banner
@@ -97,6 +98,7 @@ pub-guide/
 - 위 네 가지 외의 차이는 허용하지 않는다 — 구조·클래스·prop·텍스트는 프리뷰와 1:1로 맞춘다.
 - **코드 탭은 손으로 고치지 않는다 — 뷰를 수정한 뒤 `npm run codetab`을 돌려 재생성한다.** `npm run lint`가 `--check` 모드로 어긋남을 잡으므로, 깜빡하면 lint가 실패한다. 뷰별 예외(`viewport` 치환)는 `scripts/gen-codetab.mjs`의 `VIEWPORT_MAP`에 있다.
 - **문자열 안의 닫는 스크립트 태그는 `<\/script>`로 쓴다.** Vue SFC 파서는 `<script>` 블록을 첫 `</script>`에서 끝내므로, 이스케이프하지 않으면 스크립트 블록이 거기서 끊겨 파일이 깨진다. JS 템플릿 리터럴에서 `\/`는 `/`이므로 코드 탭에는 `</script>`로 정상 표시된다.
+- **한 페이지에 `CodePreview`를 여러 개 둘 수도 있다** (`ButtonsView.vue`처럼 카테고리별로 미리보기/코드 탭을 따로 보여줄 때). 이때는 `:code="code"` 대신 `:code="ctaCode"`처럼 **블록마다 다른 이름**을 쓴다 — `gen-codetab.mjs`가 각 이름을 별도의 코드 탭으로 취급하고, 그 블록의 템플릿에서 실제로 참조하는 최상위 `const`/`type` 선언만 골라 담는다(다른 블록의 데이터는 섞이지 않는다). 파일에 `CodePreview`가 하나뿐이면 지금처럼 `:code="code"`를 그대로 쓴다.
 
 ## 인터랙션 패턴
 

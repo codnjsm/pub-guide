@@ -16,6 +16,7 @@ const VIEWS_DIR = join(ROOT, 'src/views')
 // CodePreview를 쓰는 뷰 목록 — buildCode()가 null을 반환했을 때 "CodePreview 미사용 페이지"와
 // "정규식이 못 읽은 페이지"를 구분하기 위한 기준. 새 CodePreview 뷰를 추가하면 여기도 추가한다.
 const EXPECTED_VIEWS = new Set([
+  'ButtonsView.vue',
   'CardsView.vue',
   'CarouselView.vue',
   'FooterView.vue',
@@ -86,6 +87,96 @@ function applyViewport(file, script, tpl) {
   return [[...head, '', decl, ...tail].join('\n'), tpl]
 }
 
+// 백틱 문자열 하나를 이스케이프까지 감안해서 안전하게 찾아 제거한다
+// (정규식 [\s\S]*?로 종료 백틱을 찾으면 본문에 이스케이프된 \` 앞에서 멈출 수 있어 직접 스캔한다)
+function stripBacktickConst(text, name) {
+  const marker = `const ${name} = \``
+  const start = text.indexOf(marker)
+  if (start === -1) return text
+  let i = start + marker.length
+  while (i < text.length) {
+    if (text[i] === '\\') {
+      i += 2
+      continue
+    }
+    if (text[i] === '`') {
+      i += 1
+      break
+    }
+    i++
+  }
+  const before = text.slice(0, start).replace(/\n+$/, '')
+  const after = text.slice(i).replace(/^\n+/, '')
+  return before && after ? `${before}\n\n${after}` : before + after
+}
+
+// script 본문을 최상위 const/type 선언 단위로 쪼갠다 — 각 CodePreview 블록에 실제로 쓰인
+// 선언만 골라 넣기 위함 (한 파일에 CodePreview가 여러 개일 때)
+function splitTopLevelDecls(scriptBody) {
+  const lines = scriptBody.split('\n')
+  const decls = []
+  let cur = null
+  for (const line of lines) {
+    if (/^(const|type)\s+\w+\b/.test(line)) {
+      if (cur) decls.push(cur)
+      cur = { name: /^(?:const|type)\s+(\w+)/.exec(line)[1], lines: [line] }
+    } else if (cur) {
+      cur.lines.push(line)
+    }
+  }
+  if (cur) decls.push(cur)
+  return decls.map((d) => ({ name: d.name, text: d.lines.join('\n').replace(/\n+$/, '') }))
+}
+
+// 한 파일에 CodePreview가 여러 개(:code="이름"이 서로 다름)일 때 — 각 블록마다
+// 그 블록의 템플릿에서 실제로 쓰인 최상위 선언만 골라 독립된 코드 탭 문자열을 만든다
+function buildCodeMulti(file, source, previews) {
+  const script = /<script setup( lang="ts")?>\n([\s\S]*?)\n<\/script>/.exec(source)
+  if (!script) return null
+  const langAttr = script[1] || ''
+
+  let compScript = script[2].replace(/^import CodePreview from '[^']*'\n/m, '')
+  for (const { name } of previews) compScript = stripBacktickConst(compScript, name)
+  compScript = compScript.replace(/^\n+|\n+$/g, '')
+
+  const decls = splitTopLevelDecls(compScript)
+
+  const afterScript = source.slice(script.index + script[0].length)
+  const style = /(<style lang="scss" scoped>\n[\s\S]*?\n<\/style>)/.exec(afterScript)
+
+  const results = previews.map(({ name, inner }) => {
+    const wrapper = /^\s*<template #default[^>]*>\n([\s\S]*)\n\s*<\/template>\s*$/.exec(inner)
+    const tpl = dedent(wrapper ? wrapper[1] : inner)
+    const referenced = decls.filter((d) => new RegExp(`\\b${d.name}\\b`).test(tpl))
+    const parts = [
+      `<script setup${langAttr}>\n${referenced.map((d) => d.text).join('\n\n')}\n</script>`,
+      `<template>\n${indent(tpl, 2)}\n</template>`,
+    ]
+    if (style) parts.push(style[1])
+    return { name, code: parts.join('\n\n') }
+  })
+
+  return { script, results }
+}
+
+function escapeCode(code) {
+  return code
+    .replaceAll('\\', '\\\\')
+    .replaceAll('`', '\\`')
+    .replaceAll('${', '\\${')
+    .replaceAll('</script>', '<\\/script>')
+}
+
+// buildCodeMulti()의 결과를 파일에 끼워 넣는다 (이름별 const 여러 개)
+function renderMulti(source, script, results) {
+  let kept = script[2]
+  for (const { name } of results) kept = stripBacktickConst(kept, name)
+  kept = kept.replace(/\n+$/, '')
+  const consts = results.map(({ name, code }) => `const ${name} = \`${escapeCode(code)}\``).join('\n\n')
+  const start = source.indexOf(script[2])
+  return source.slice(0, start) + `${kept}\n\n${consts}` + source.slice(start + script[2].length)
+}
+
 // 뷰 파일 전체에서, 코드 탭에 들어갈 완성 컴포넌트 문자열을 만든다
 function buildCode(file, source) {
   const script = /<script setup( lang="ts")?>\n([\s\S]*?)\n<\/script>/.exec(source)
@@ -119,18 +210,11 @@ function buildCode(file, source) {
 
 // 재생성된 code 변수를 끼워 넣은 파일 전체 내용
 function render(source, script, code) {
-  // 백슬래시를 가장 먼저 이스케이프한다 — 나중에 하면 아래 이스케이프가 만든 백슬래시까지 다시 이스케이프된다.
-  // 문자열 안의 `, ${ 는 템플릿 리터럴을 깨고, </script> 는 SFC 파서가 스크립트 블록을 끊는다
-  const escaped = code
-    .replaceAll('\\', '\\\\')
-    .replaceAll('`', '\\`')
-    .replaceAll('${', '\\${')
-    .replaceAll('</script>', '<\\/script>')
-  const kept = script[2]
-    .replace(/\n*const code = (`[\s\S]*?`|'[^']*'|"[^"]*")\s*$/, '')
-    .replace(/\n+$/, '')
+  const kept = stripBacktickConst(script[2], 'code').replace(/\n+$/, '')
   const start = source.indexOf(script[2])
-  return source.slice(0, start) + `${kept}\n\nconst code = \`${escaped}\`` + source.slice(start + script[2].length)
+  return (
+    source.slice(0, start) + `${kept}\n\nconst code = \`${escapeCode(code)}\`` + source.slice(start + script[2].length)
+  )
 }
 
 const check = process.argv.includes('--check')
@@ -140,6 +224,31 @@ let done = 0
 for (const file of readdirSync(VIEWS_DIR).filter((f) => f.endsWith('.vue')).sort()) {
   const path = join(VIEWS_DIR, file)
   const source = readFileSync(path, 'utf8')
+
+  const previews = [...source.matchAll(/<CodePreview\s+:code="(\w+)">\n([\s\S]*?)\n\s*<\/CodePreview>/g)].map(
+    (m) => ({ name: m[1], inner: m[2] }),
+  )
+
+  if (previews.length >= 2) {
+    // 한 파일에 CodePreview가 여러 개 — 블록마다 독립된 코드 탭 문자열을 만든다
+    const built = buildCodeMulti(file, source, previews)
+    if (!built) throw new Error(`${file}: CodePreview 여러 개인데 <script setup> 정규식이 못 읽었다`)
+    const next = renderMulti(source, built.script, built.results)
+    if (next === source) {
+      done++
+      continue
+    }
+    if (check) {
+      stale.push(file)
+    } else {
+      writeFileSync(path, next, 'utf8')
+      const lines = built.results.reduce((n, r) => n + r.code.split('\n').length, 0)
+      console.log(`갱신 ${file} — 코드 탭 ${built.results.length}개 · 총 ${lines}줄`)
+      done++
+    }
+    continue
+  }
+
   const built = buildCode(file, source)
   if (!built) {
     // EXPECTED_VIEWS에 있는데 못 읽었다면 "CodePreview 미사용"이 아니라 정규식 실패다 — 조용히 넘기지 않는다

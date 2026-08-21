@@ -7,6 +7,7 @@ const routes = [
     name: 'colors-typography',
     component: () => import('../views/ColorsTypographyView.vue'),
   },
+  { path: '/buttons', name: 'buttons', component: () => import('../views/ButtonsView.vue') },
   { path: '/header', name: 'header', component: () => import('../views/HeaderView.vue') },
   { path: '/fullmenu', name: 'fullmenu', component: () => import('../views/FullMenuView.vue') },
   {

@@ -1,6 +1,7 @@
 export const navItems = [
   { title: 'Overview', to: '/', icon: 'mdi-view-dashboard-outline' },
   { title: 'Colors / Typography', to: '/colors-typography', icon: 'mdi-palette-outline' },
+  { title: 'Buttons', to: '/buttons', icon: 'mdi-gesture-tap-button' },
   { title: 'Header / GNB', to: '/header', icon: 'mdi-dock-top' },
   { title: 'Full Menu Overlay', to: '/fullmenu', icon: 'mdi-menu' },
   { title: 'Search Panel', to: '/search-suggest', icon: 'mdi-magnify' },
