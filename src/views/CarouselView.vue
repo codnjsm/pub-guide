@@ -211,6 +211,7 @@ function bgStyle(image: string) {
       <li>하단 점을 클릭해도 해당 슬라이드로 이동</li>
       <li>재생/일시정지 버튼으로 자동재생 토글</li>
       <li>배경은 실제 이미지 대신 아이콘으로 표시</li>
+      <li>실제 이미지 권장 사이즈: 1920×420px 이상(가로로 넓은 배너, 높이 420px 고정에 맞춤)</li>
     </ul>
 
     <CodePreview :code="code">

@@ -3,17 +3,33 @@ import CodePreview from '../components/guide/CodePreview.vue'
 
 const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
 
+const heroImage: string | undefined = undefined
+
+function bgStyle(image?: string) {
+  return image ? { backgroundImage: 'url("' + image + '")' } : undefined
+}
+
 const code = `<script setup lang="ts">
 import { useDisplay } from 'vuetify'
 
 const { xs } = useDisplay()
 
 const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
+
+const heroImage: string | undefined = undefined
+
+function bgStyle(image?: string) {
+  return image ? { backgroundImage: 'url("' + image + '")' } : undefined
+}
 <\/script>
 
 <template>
-  <div class="hero" :class="{ 'hero--mobile': xs }">
-    <v-icon icon="mdi-image" size="40" class="hero__icon" />
+  <div
+    class="hero"
+    :class="{ 'hero--mobile': xs }"
+    :style="bgStyle(heroImage)"
+  >
+    <v-icon v-if="!heroImage" icon="mdi-image" size="40" class="hero__icon" />
 
     <ul v-if="!xs" class="hero__breadcrumb">
       <li v-for="(crumb, i) in breadcrumb" :key="crumb" class="hero__crumb">
@@ -139,12 +155,20 @@ const breadcrumb = ['홈', '구매/이벤트', '모델탐색', 'Trendy Hyundai']
       <li>데스크톱·태블릿: 가로로 넓은 비율, 좌측 정렬, breadcrumb 표시</li>
       <li>모바일: 세로로 긴 비율, 중앙 정렬, breadcrumb 숨김</li>
       <li>배경은 실제 이미지 대신 회색 플레이스홀더로 표시</li>
+      <li>
+        실제 이미지 권장 사이즈: 데스크톱·태블릿 2028×984px 이상(약 2.06:1), 모바일 535×778px
+        이상(약 0.69:1)
+      </li>
     </ul>
 
     <CodePreview :code="code">
       <template #default="{ viewport }">
-        <div class="hero" :class="{ 'hero--mobile': viewport === 'mobile' }">
-          <v-icon icon="mdi-image" size="40" class="hero__icon" />
+        <div
+          class="hero"
+          :class="{ 'hero--mobile': viewport === 'mobile' }"
+          :style="bgStyle(heroImage)"
+        >
+          <v-icon v-if="!heroImage" icon="mdi-image" size="40" class="hero__icon" />
 
           <ul v-if="viewport !== 'mobile'" class="hero__breadcrumb">
             <li v-for="(crumb, i) in breadcrumb" :key="crumb" class="hero__crumb">
