@@ -28,7 +28,7 @@ const menuItems = ['모델', '구매/이벤트', '서비스/멤버십', '디지�
     <v-spacer />
 
     <template v-if="mdAndUp">
-      <v-btn variant="text" size="small" class="font-weight-bold">내차 추천받기</v-btn>
+      <v-btn variant="text" size="small" class="font-weight-bold">내 차 추천받기</v-btn>
 
       <v-menu open-on-hover>
         <template #activator="{ props }">
@@ -101,7 +101,7 @@ const menuItems = ['모델', '구매/이벤트', '서비스/멤버십', '디지�
           <v-spacer />
 
           <template v-if="viewport === 'desktop'">
-            <v-btn variant="text" size="small" class="font-weight-bold">내차 추천받기</v-btn>
+            <v-btn variant="text" size="small" class="font-weight-bold">내 차 추천받기</v-btn>
 
             <v-menu open-on-hover>
               <template #activator="{ props }">
