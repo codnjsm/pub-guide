@@ -20,7 +20,7 @@ npm run format      # Prettier
 ## 사용 기술
 
 - Vue 3 — UI 프레임워크
-- TypeScript — 정적 타입
+- TypeScript — 정적 타입 언어
 - Vuetify — 컴포넌트 라이브러리
 - Vue Router — 라우팅
 - Vite — 빌드 도구

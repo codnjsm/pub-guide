@@ -13,6 +13,11 @@
     <v-sheet border rounded="lg" class="mb-10 pa-2">
       <v-list density="comfortable">
         <v-list-item prepend-icon="mdi-vuejs" title="Vue 3" subtitle="UI 프레임워크" />
+        <v-list-item
+          prepend-icon="mdi-language-typescript"
+          title="TypeScript"
+          subtitle="정적 타입 언어"
+        />
         <v-list-item prepend-icon="mdi-vuetify" title="Vuetify" subtitle="컴포넌트 라이브러리" />
         <v-list-item prepend-icon="mdi-router" title="Vue Router" subtitle="라우팅" />
         <v-list-item prepend-icon="mdi-lightning-bolt" title="Vite" subtitle="빌드 도구" />
