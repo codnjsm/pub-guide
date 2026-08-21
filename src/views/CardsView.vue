@@ -6,6 +6,7 @@ const categories: {
   items: {
     title: string
     subtitle: string
+    image?: string
     badges: { badge?: boolean; description?: string; link?: string }
   }[]
 }[] = [
@@ -48,12 +49,17 @@ const categories: {
   },
 ]
 
+function bgStyle(image?: string) {
+  return image ? { backgroundImage: 'url("' + image + '")' } : undefined
+}
+
 const code = `<script setup lang="ts">
 const categories: {
   title: string
   items: {
     title: string
     subtitle: string
+    image?: string
     badges: { badge?: boolean; description?: string; link?: string }
   }[]
 }[] = [
@@ -95,6 +101,10 @@ const categories: {
     ],
   },
 ]
+
+function bgStyle(image?: string) {
+  return image ? { backgroundImage: 'url("' + image + '")' } : undefined
+}
 <\/script>
 
 <template>
@@ -113,9 +123,9 @@ const categories: {
           target="_blank"
           class="cards__item"
         >
-          <div class="cards__item-img">
+          <div class="cards__item-img" :style="bgStyle(item.image)">
             <span v-if="item.badges.badge" class="cards__badge cards__badge--corner">NEW</span>
-            <v-icon icon="mdi-car" size="40" class="cards__item-icon" />
+            <v-icon v-if="!item.image" icon="mdi-car" size="40" class="cards__item-icon" />
           </div>
           <span class="cards__item-title">{{ item.title }}</span>
           <span class="cards__item-subtitle">{{ item.subtitle }}</span>
@@ -242,6 +252,7 @@ const categories: {
       <li>클릭하면 새 창으로 링크 열림</li>
       <li>이미지 위 코너 배지 하나와, 아이콘이 있거나 없는 인라인 배지 두 종류</li>
       <li>실제 이미지 대신 회색 플레이스홀더로 표시</li>
+      <li>실제 이미지 권장 사이즈: 400×400px 이상(정사각형 1:1)</li>
     </ul>
 
     <CodePreview :code="code">
@@ -260,9 +271,9 @@ const categories: {
               target="_blank"
               class="cards__item"
             >
-              <div class="cards__item-img">
+              <div class="cards__item-img" :style="bgStyle(item.image)">
                 <span v-if="item.badges.badge" class="cards__badge cards__badge--corner">NEW</span>
-                <v-icon icon="mdi-car" size="40" class="cards__item-icon" />
+                <v-icon v-if="!item.image" icon="mdi-car" size="40" class="cards__item-icon" />
               </div>
               <span class="cards__item-title">{{ item.title }}</span>
               <span class="cards__item-subtitle">{{ item.subtitle }}</span>
