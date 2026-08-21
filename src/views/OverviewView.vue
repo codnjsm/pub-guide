@@ -35,16 +35,15 @@ pub-guide/
   │   └── icons.svg
   ├── src/
   │   ├── App.vue                       # 최상위 레이아웃 (앱바 + 좌측 네비게이션 드로어)
-  │   ├── main.js                       # 앱 진입점 (router, vuetify 플러그인 등록)
+  │   ├── main.ts                       # 앱 진입점 (router, vuetify 플러그인 등록)
   │   ├── assets/
-  │   │   ├── carousel-car.svg          # Carousel 섹션 차량 실루엣 SVG
-  │   │   └── hero.png                  # Cards 섹션 예시 이미지
+  │   │   └── carousel-car.svg          # Carousel 섹션 차량 실루엣 SVG
   │   ├── plugins/
-  │   │   └── vuetify.js                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
+  │   │   └── vuetify.ts                # Vuetify 인스턴스 설정 (테마 컬러, 컴포넌트/디렉티브 등록)
   │   ├── router/
-  │   │   └── index.js                  # 섹션별 라우트 정의
+  │   │   └── index.ts                  # 섹션별 라우트 정의
   │   ├── data/
-  │   │   └── navItems.js               # 좌측 네비게이션 메뉴 목록
+  │   │   └── navItems.ts               # 좌측 네비게이션 메뉴 목록
   │   ├── components/
   │   │   └── guide/
   │   │       ├── CodePreview.vue       # 미리보기/코드 탭 전환 + 반응형 뷰포트 토글 (공용 컴포넌트)
@@ -64,7 +63,8 @@ pub-guide/
   │   └── gen-codetab.mjs               # 각 섹션 페이지의 코드 탭을 뷰 내용에서 재생성 (npm run codetab)
   ├── eslint.config.js
   ├── .prettierrc
-  └── vite.config.js
+  ├── tsconfig.json
+  └── vite.config.ts
       </code>
     </pre>
 
@@ -75,8 +75,8 @@ pub-guide/
         <code>src/views/</code>에 새 <code>XxxView.vue</code> 작성 (다른 섹션 페이지처럼
         <code>CodePreview</code>로 미리보기/코드 감싸기)
       </li>
-      <li><code>src/router/index.js</code>에 라우트 등록</li>
-      <li><code>src/data/navItems.js</code>에 메뉴 항목 추가</li>
+      <li><code>src/router/index.ts</code>에 라우트 등록</li>
+      <li><code>src/data/navItems.ts</code>에 메뉴 항목 추가</li>
       <li>
         스타일은 <code>&lt;style lang="scss" scoped&gt;</code> + 중첩(<code>&amp;</code>) 금지,
         평탄한 선택자만 사용
