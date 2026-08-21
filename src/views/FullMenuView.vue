@@ -716,6 +716,7 @@ function scrollToSection(id: string) {
       <li>상단 검색창 + 닫기 버튼, 그 아래 어두운 탭 바, 본문은 6개 섹션이 다단 그리드로 배치</li>
       <li>탭 바의 항목을 클릭하면 해당 섹션으로 스크롤</li>
       <li>우측 상단 버튼으로 메뉴를 열고 닫음</li>
+      <li><code>v-expand-transition</code>으로 열고 닫히는 애니메이션</li>
     </ul>
 
     <CodePreview :code="code">

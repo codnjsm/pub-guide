@@ -64,6 +64,14 @@ watch(
   max-width: 1080px;
 }
 
+.guide-container code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f6f3f2;
+  font-family: 'Menlo', 'Consolas', monospace;
+  font-size: 0.875em;
+}
+
 .v-container {
   padding: 30px;
 }

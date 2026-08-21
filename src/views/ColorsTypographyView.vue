@@ -112,6 +112,13 @@ const typeScale = [
   overflow: auto;
 }
 
+.usage-example code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+}
+
 .type-scale-table :deep(td),
 .type-scale-table :deep(th) {
   padding-top: 5px;

@@ -125,4 +125,11 @@ npm run format       # Prettier
   line-height: 1.6;
   overflow: auto;
 }
+
+.folder-tree code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+}
 </style>
