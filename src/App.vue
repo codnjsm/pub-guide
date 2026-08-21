@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useDisplay } from 'vuetify'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { navItems } from './data/navItems'
 import HyundaiLogo from './components/guide/HyundaiLogo.vue'
 
 const route = useRoute()
+const router = useRouter()
 const { mobile, xs } = useDisplay()
 const drawer = ref(!mobile.value)
 
@@ -28,7 +29,7 @@ watch(
       :class="{ 'app-bar--center-title': xs }"
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <v-toolbar-title class="d-flex align-center">
+      <v-toolbar-title class="d-flex align-center app-title-link" @click="router.push('/')">
         <HyundaiLogo />
         <span class="font-weight-bold text-primary ml-2 app-title-text">퍼블리싱 가이드</span>
       </v-toolbar-title>
@@ -89,6 +90,10 @@ watch(
 
 .app-title-text {
   line-height: 1;
+}
+
+.app-title-link {
+  cursor: pointer;
 }
 
 .nav-drawer-locked {
